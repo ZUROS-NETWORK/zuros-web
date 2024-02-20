@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>ZUROS NETWORK</title>
+	
+	<!-- Favicons -->
+	<link href="https://dunb17ur4ymx4.cloudfront.net/webstore/favicons/0a1c5e9bb76e1c9ea1ce469c6e2ae7f958d29269.png" rel="icon" />
+	
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+	<link href="assets/css/style.css" rel="stylesheet" />
+	
+
+</head>
+<body>
+    
+    <!-- ======= Header ======= -->
+<header>
+    <noscript>
+        <embed type="text/html" src="https://zuros.xyz/nav.html">
+        <p class="wText"><a href="http://www.enable-javascript.com/" target="_blank">
+Para obtener una funcionalidad completa de este sitio es necesario activar JavaScript.</a></p>
+</noscript>
+<script id="replace_with_navbar" src="https://zuros.xyz/assets/js/nav.js"></script>
+</header>
+
+    <!-- End Header -->
+<main>
+<center>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+<h2>ERROR 404 </h2>
+
+<p>
+ Página no encontrada 
+</p>
+<a href="https://www.zuros.xyz">Volver a la página principal</a>
+<br/>
+<br/>
+<br/>
+<br/>
+<p>
+ crees que es un error? contacta a un staff en </p><a href="https://discord.zuros.xyz">Discord</a>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+    <center>
+</main>
+    <!-- End #main -->
+    
+    <!-- ======= Footer ======= -->
+<footer>
+	
+<div class="copyright">&copy; ZUROS NETWORK
+</div>
+    <p>Links utiles: </p>
+<ul>
+	<li><a href="https://discord.zuros.xyz">Discord</a><a href="#"></li>
+	<li><a href="https://zuros.tebex.io/category/donar">Tienda</a></li>
+	<li><a href="/legal-terms">Terminos de servicio</a></li>
+</ul>
+</footer>
+<!-- End Footer -->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+	
+</html>

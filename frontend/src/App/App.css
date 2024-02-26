@@ -10,5 +10,9 @@ body, #root{
   height: 100vh;
   font-family: Quicksand;
   font-size: large;
+  flex: 1;
 }
-
+a {
+  text-decoration: none;
+  color:deeppink;
+}

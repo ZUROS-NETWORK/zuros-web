@@ -1,0 +1,7 @@
+footer {
+display: flex;
+gap: 20px;
+justify-content: space-evenly;
+background-color: rgb(253, 215, 239);
+flex-shrink: 0;
+}

@@ -1,0 +1,9 @@
+.vision-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.vision-section .vision-cards {
+  display: flex;
+  gap: 30px;
+}

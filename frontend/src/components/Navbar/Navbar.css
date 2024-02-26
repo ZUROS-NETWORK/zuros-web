@@ -2,7 +2,10 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 1%;
+
+    position: fixed;
+    width: 100%;
+    background-color: var(--background-color);
 }
 .logo {
     display: flex;

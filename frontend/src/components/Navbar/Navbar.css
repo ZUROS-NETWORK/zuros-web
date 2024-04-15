@@ -1,48 +1,87 @@
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+  background-color: var(--background-color);
+}
 
-    position: fixed;
-    width: 100%;
-    background-color: var(--background-color);
-}
 .logo {
-    display: flex;
-    font-size: 0.5rem;
-    align-items: center;
+  display: flex;
+  font-size: 0.5rem;
+  align-items: center;
 }
+
 .logo-name {
-    color: hotpink;
-    .blue-logo{
-         color: rgb(81, 229, 255);
-    }
+  color: hotpink;
+
+  .blue-logo {
+    color: rgb(81, 229, 255);
+  }
 }
-.logo img{
+
+.logo img {
   width: 50px;
   margin-right: 20px;
 }
-    nav ul {
-      list-style-type: none;
 
-      display: flex;
-      justify-content: center;
-    }
-    nav li {
-      margin: 0 0.5rem;
-    }
-    nav a {
-      color: inherit;
-      text-decoration: none;
-      padding: 0.5rem;
-    }
-    nav a:hover {
-      background-color: #555;
-    }
-    @media screen and (max-width: 600px) {
-      nav ul {
-        flex-direction: column;
-        align-items: center;
-        display: none;
-      }
-    }
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar li {
+  margin: 0 0.5rem;
+}
+
+.navbar a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.navbar a:hover {
+  background-color: #555;
+}
+
+.mobile-navbar-button {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    position: absolute;
+    top: -60px;
+    right: -1000px;
+  }
+
+  .mobile-navbar-button {
+    display: flex;
+  }
+}
+
+.mobile-navbar-active {
+  width: 100%;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 99%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  border-bottom: 1px inset var(--content-color);
+  transition: all .2s ease;
+  background-color: var(--background-color);
+}
+
+.mobile-navbar-active a {
+  font-size: 2rem;
+  margin-top: 1rem;
+  color: var(--content-color);
+}
+
+.mobile-navbar-active ul {
+  flex-direction: column;
+}

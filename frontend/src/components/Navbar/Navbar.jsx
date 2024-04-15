@@ -1,6 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { useState } from 'react'
 import "./Navbar.css";
+import { BurguerButton } from "../BurguerButton/BurguerButton";
+
 const Navbar = () => {
+  const [menuStatus, setMenuStatus] = useState(false)
+const handleMenu = () => {
+  setMenuStatus(!menuStatus)
+}
   return (
     <header>
       <div className="logo">
@@ -10,28 +17,31 @@ const Navbar = () => {
           <span>NETWORK</span>
         </h1>
       </div>
-      <nav>
+      <nav className={`navbar ${menuStatus ? 'mobile-navbar-active' : ''}`}>
         <ul>
-          <li>
+          <li onClick={()=> setMenuStatus(false)}>
             <NavLink end to="/">
               Inicio
             </NavLink>
           </li>
-          <li>
+          <li onClick={()=> setMenuStatus(false)}>
             <NavLink to="/info">Info</NavLink>
           </li>
-          <li>
+          <li onClick={()=> setMenuStatus(false)}>
             <NavLink end to="/tienda">
               Tienda
             </NavLink>
           </li>
-          <li>
+          <li onClick={()=> setMenuStatus(false)}>
             <NavLink to="/mapa">Mapas</NavLink>
           </li>
-          <li>
+          <li onClick={()=> setMenuStatus(false)}>
             <a href="https://discord.zuros.xyz/">Discord</a>
           </li>
         </ul>
+      </nav>
+      <nav onClick={()=> handleMenu()} className="mobile-navbar-button">
+        <BurguerButton isOpen={menuStatus} />
       </nav>
     </header>
   );

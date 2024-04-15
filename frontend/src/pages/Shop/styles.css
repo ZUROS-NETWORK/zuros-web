@@ -1,0 +1,47 @@
+.categories-section ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.categories-section li {
+  margin: 0 0.5rem;
+}
+
+.categories-section a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.category-button {
+  all: unset;
+  cursor: pointer;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(193px, 1fr));
+  gap: 20px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 18px;
+  border-radius: 5px;
+}
+
+.product-image {
+  width: 100%;
+}
+
+.product-sale {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+}

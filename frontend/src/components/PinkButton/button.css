@@ -1,0 +1,13 @@
+.pink-button {
+    background-color: deeppink;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.pink-button:hover {
+    background-color: rgb(253, 149, 205);
+}

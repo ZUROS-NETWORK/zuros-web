@@ -1,0 +1,28 @@
+.toggle-text {
+    display: none;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+.toggle-text {
+    display: block;
+}
+
+.toggle-button {
+    display: flex;
+    justify-content: center;
+    background-color: hotpink;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.toggle-button img {
+    width: 17px;
+}
+.toggle-button:hover {
+    background-color: #ff8c00;
+}

@@ -3,7 +3,44 @@
   flex-direction: column;
   align-items: center;
 }
+
 .vision-section .vision-cards {
   display: flex;
   gap: 30px;
+}
+
+.presentation-section {
+  background: linear-gradient(to right, var(--background-color), rgba(255, 255, 255, 0.596)), url('./presentation-background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px;
+  width: 100%;
+margin-bottom: 40px;
+}
+
+.presentation-section div {
+  width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+  .presentation-section div {
+    width: 100%;
+  }
+}
+
+.presentation-text-large {
+  font-size: 50px;
+}
+
+.pink-button {
+  background-color: deeppink;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pink-button:hover {
+  background-color: rgb(253, 149, 205);
 }

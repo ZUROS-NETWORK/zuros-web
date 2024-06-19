@@ -1,25 +1,39 @@
+import { HowToJoin } from "../../components/HowToJoin/ToggleText";
 import "./styles.css";
 export const Home = () => {
   return (
     <>
-      <h2>BIENVENID@ A ZUROS NETWORK</h2>
-      <section>
-        <p>
-          zuros network es uno de los mejores y más exclusivos servidores de
-          Minecraft survival y de minijuegos. Aquí puedes disfrutar de una
-          experiencia de Minecraft sin toxicidad un lugar pacifico para todos.
-          100% LGBTQ+ Friendly. Para todas las plataformas Java / Bedrock, fiel
-          al juego, agregando muchas mejoras en la calidad de vida. Relajarte y
-          disfrutar de tu caminata.
-        </p>
+    
+      <section className="presentation-section">
+        <div>
+          <p className="presentation-text-large">
+            ¿Quieres empezar una gran aventura?
+          </p>
+          <p>
+            No importa cómo juegues ni cuál sea tu objetivo. Zuros network
+            siempre puede contarte una historia diferente
+          </p>
+        </div>
+        <a href="#join"><button className="pink-button">Jugar ahora</button></a>
       </section>
       <section>
+        <p>
+          Zuros network es uno de los mejores y más exclusivos servidores de
+          Minecraft survival y de minijuegos. Aquí puedes disfrutar de una
+          experiencia de Minecraft sin toxicidad un lugar pacifico para todos.
+          100% LGBTQ+ Friendly. fiel al juego, agregando muchas mejoras en la
+          calidad de vida. Relajarte y disfrutar de tu caminata.
+        </p>
+      </section>
+      <section id="join">
         <p>
           Zuros Network es un servidor de Minecraft java pero también es un
           servidor de Minecraft Bedrock. ¡Esto significa que puede conectarse
           usando su PC, Mac, teléfono o incluso una consola!
         </p>
-        <a href="join">QUE ESPERAS UNETE YA!!!</a>
+        <div className="how-to-join">
+          <HowToJoin />
+        </div>
       </section>
 
       <section className="vision-section">

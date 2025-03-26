@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zuros-store-backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-20",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "database name",
+      "database_id": "database id"
+    }
+  ],
+  "vars": {
+     "JWT_SECRET": "jwt secret"
+   }
+}

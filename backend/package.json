@@ -1,12 +1,12 @@
 {
   "name": "zuros-store-backend",
-
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
-    "hono": "^4.7.5"
+    "hono": "^4.7.5",
+    "bcryptjs": "^3.0.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",

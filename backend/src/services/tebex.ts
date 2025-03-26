@@ -1,4 +1,4 @@
-const tebexToken = 'sus';
+const tebexToken = 'l9j9-cf13199dfe8cadbcdbb253df6ad3b7c001042512';
 const BASE_URL = `https://headless.tebex.io/api/accounts/${tebexToken}/`;
 
 async function getData(endpoint: string, method: string, body?: any) {

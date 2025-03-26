@@ -32,7 +32,7 @@ CREATE TABLE cart (
 
 CREATE TABLE cart_items (
     id INTEGER PRIMARY KEY,
-    product_id INTEGER NOT NULL UNIQUE,
+    product_id INTEGER NOT NULL,
     quantity INTEGER NOT NULL CHECK (quantity > 0),
     cart_id TEXT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES package(id) ON DELETE CASCADE,

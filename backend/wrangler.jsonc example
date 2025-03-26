@@ -11,6 +11,7 @@
     }
   ],
   "vars": {
-     "JWT_SECRET": "jwt secret"
+     "JWT_SECRET": "jwt secret",
+     "JWT_EXPIRATION_HOURS": 1
    }
 }

@@ -18,6 +18,7 @@ export const registerHandler = async (c: Context) => {
 
 export const loginHandler = async (c: Context) => {
   const db = c.env.DB;
+  const expirationHours = c.env.JWT_EXPIRATION_HOURS;
   const JwtSecret = c.env.JWT_SECRET
   const { username, password } = await c.req.json()
   if (!username || !password) {
@@ -36,8 +37,10 @@ export const loginHandler = async (c: Context) => {
     await incrementFailedAttempts(db ,username)
     return c.json({ error: 'Invalid username or password' }, 401)
   }
+  const iat = Math.floor(Date.now() / 1000);
+  const exp = iat + (expirationHours * 60 * 60);
   await resetFailedAttempts(db, username)
-  const token = await generateToken(JwtSecret, { username })
+  const token = await generateToken(JwtSecret, { username, iat: iat, exp: exp })
   return c.json({ token })
 }
 

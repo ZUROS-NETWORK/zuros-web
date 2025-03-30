@@ -15,7 +15,9 @@ export const CheckoutProvider = ({ children }) => {
   const { cartId, deleteCart } = useCart()
   const proceedToCheckout = async () => {
     setOverlayContent(null)
-    const checkoutId = await getCheckoutId({ id: cartId, username })
+    const checkoutId = await getCheckoutId({ id: cartId, username }).catch(()=>{
+      cancelCheckout()
+    });
       Tebex.checkout.init({
                 ident: checkoutId+'/payment',
                 locale: 'es_ES',
@@ -29,6 +31,7 @@ export const CheckoutProvider = ({ children }) => {
         Tebex.checkout.on("open", cancelCheckout)
         Tebex.checkout.on("close", cancelCheckout)
         Tebex.checkout.on("payment:complete",completeCheckout)
+        Tebex.checkout.on("payment:error",cancelCheckout)
   };
  const cancelCheckout = () => {
     setOverlayOpen(false)

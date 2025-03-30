@@ -4,7 +4,7 @@
 }
 
 body, #root{
-  background-color: var(--background-color);
+  background: #fdf2f8;
   color: var(--content-color);
   margin: 0;
   height: 100vh;

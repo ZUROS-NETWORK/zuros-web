@@ -1,0 +1,55 @@
+/* Estilos Lightbox */
+.checkout-overlay {
+    all: unset;
+    zoom: 1;
+    forced-color-adjust: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.459);
+    opacity: 0;
+    transition: opacity .4s ease;
+    will-change: opacity;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    visibility: hidden;
+}
+
+.checkout-overlay--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+/* Spinner */
+.checkout-overlay-spinner {
+    position: absolute;
+    max-height: 60vmin;
+    max-width: 60vmin;
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    border: 3px solid rgba(22, 20, 21, 0.096);
+    border-top-color: #ec4e94;
+    border-radius: 100%;
+    animation: checkout-overlay-spinner-rotation .5s infinite linear;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes checkout-overlay-spinner-rotation {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(359deg);
+    }
+}

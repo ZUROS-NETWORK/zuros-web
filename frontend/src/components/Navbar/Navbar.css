@@ -5,6 +5,7 @@ header {
   position: fixed;
   width: 100%;
   background-color: var(--background-color);
+  z-index: 1;
 }
 
 .logo {

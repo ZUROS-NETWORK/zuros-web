@@ -28,7 +28,7 @@ const handleMenu = () => {
             <NavLink to="/info">Info</NavLink>
           </li>
           <li onClick={()=> setMenuStatus(false)}>
-            <a href="https://zuros.tebex.io/">Tienda</a>
+            <NavLink to="/tienda">Tienda</NavLink>
           </li>
           <li onClick={()=> setMenuStatus(false)}>
             <NavLink to="https://map.zuros.xyz/">Mapas</NavLink>

@@ -16,9 +16,10 @@ justify-content: center;
   max-width: 300px;
 }
 .presentation-section {
-  background: linear-gradient(to right, var(--background-color), rgba(255, 255, 255, 0.596)), url('https://zuros.xyz/presentation-background.png');
+  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('http://localhost:5173/presentation-background.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  border-radius: 20px;
+  background-size:auto;
   padding: 30px;
   width: 100%;
   margin-bottom: 40px;
@@ -29,6 +30,10 @@ justify-content: center;
 }
 
 @media screen and (max-width: 600px) {
+  .presentation-section {
+      width: 100%;
+      border-radius: 0px;
+    }
   .presentation-section div {
     width: 100%;
   }

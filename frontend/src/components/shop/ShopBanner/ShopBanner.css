@@ -1,0 +1,43 @@
+.shop-banner {
+    padding: 2rem 0;
+    padding-top: 1%;
+}
+
+.shop-banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.shop-banner-title {
+    margin-bottom: 1rem;
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #ec4899;
+}
+
+.shop-banner-description {
+    margin: 0 auto;
+    max-width: 800px;
+    color: #4b5563;
+}
+
+.shop-banner-tag-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.shop-banner-tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background-color: #ec4899;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+}

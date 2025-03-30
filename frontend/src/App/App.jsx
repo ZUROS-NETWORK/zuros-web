@@ -9,6 +9,8 @@ import Products from "../pages/Shop";
 import { Layout } from "../components/Layout/Layout";
 import { LegalTerms } from "../pages/LegalTerms";
 import { Join } from "../pages/join";
+import { CartProvider } from "../context/CartContext";
+import { CheckoutProvider } from "../context/CheckoutContext";
 
 function App() {
   return (
@@ -20,7 +22,7 @@ function App() {
 
           <Route path="info" element={<Info />} />
           <Route path="mapa" element={<Maps />} />
-          <Route path="tienda" element={<Products />} />
+          <Route path="tienda" element={<CartProvider><CheckoutProvider><Products /></CheckoutProvider></CartProvider>} />
           <Route path="tienda/:prodcutId" element={<ProductDetails />} />
           <Route path="legal-terms" element={<LegalTerms />} />
           <Route path="join" element={<Join />} />

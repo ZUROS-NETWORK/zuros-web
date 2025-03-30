@@ -2,7 +2,7 @@
 import { FloatingCartButton } from "../../components/shop/CartButton/CartButton";
 import { AlertTriangle } from "lucide-react";
 import "./styles.css";
-import useProducts from "../../hooks/useProducts";
+import {useProductsContext} from "../../context/ProductsContext";
 import { useCart } from "../../context/CartContext";
 import ProductCard from "../../components/shop/Card/ProductCard";
 import { ProductCardSkeleton } from "../../components/shop/Card/SkeletonCard";
@@ -23,7 +23,7 @@ const Products = () => {
     closeDetails,
     packageDetails
 
-  } = useProducts();
+  } = useProductsContext();
   const { toggleCart, addToCart } = useCart();
 
   return (

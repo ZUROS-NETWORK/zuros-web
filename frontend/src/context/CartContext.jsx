@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { createCart, deleteCartDb, getCart, updateCart } from "../services/api";
-import useProducts from "../hooks/useProducts";
+import { useProductsContext } from "./ProductsContext";
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
@@ -9,8 +9,8 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartId, setCartId] = useState(localStorage.getItem("cartId"));
-  const { packages } = useProducts(); 
-
+  const { packages } = useProductsContext()
+console.log(packages)
   async function fetchCart() {
     if (!cartId) return;
     const cartData = await getCart(cartId);
@@ -23,6 +23,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (id, quantity = 1) => {
     const product = packages.find((p) => p.id === id);
+    console.log(product)
     if (!product) return;
 
     let updatedCart;

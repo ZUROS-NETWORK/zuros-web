@@ -1,4 +1,4 @@
-export const LegalTerms = () => {
+const LegalTerms = () => {
   return (
     <section>
       <section>
@@ -198,3 +198,4 @@ export const LegalTerms = () => {
     </section>
   );
 };
+export default LegalTerms

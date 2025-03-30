@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { getCategories, getPackages } from "../services/api";
 
-const useProducts = () => {
+const ProductsContext = createContext();
+
+export const useProductsContext = () => useContext(ProductsContext);
+
+export const ProductsProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [packages, setPackages] = useState([]);
   const [packageDetails, setPackageDetails] = useState(null);
@@ -47,17 +51,21 @@ const useProducts = () => {
     setPackageDetails(null);
   }
 
-  return {
-    categories,
-    packages,
-    packageDetails,
-    selectedCategoryId,
-    isLoading,
-    error,
-    setSelectedCategoryId,
-    showDetails,
-    closeDetails
-  };
+  return (
+    <ProductsContext.Provider
+      value={{
+        categories,
+        packages,
+        packageDetails,
+        selectedCategoryId,
+        isLoading,
+        error,
+        setSelectedCategoryId,
+        showDetails,
+        closeDetails,
+      }}
+    >
+      {children}
+    </ProductsContext.Provider>
+  );
 };
-
-export default useProducts;

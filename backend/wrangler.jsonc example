@@ -12,6 +12,7 @@
   ],
   "vars": {
      "JWT_SECRET": "jwt secret",
-     "JWT_EXPIRATION_HOURS": 1
+     "JWT_EXPIRATION_HOURS": 1,
+     "TEBEX_PUBLIC_TOKEN": "Public Token"
    }
 }

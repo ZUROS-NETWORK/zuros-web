@@ -4,4 +4,4 @@ import { authMiddleware } from "../middlewares/auth"
 
 export const updatePricesRouter = new Hono()
 
-updatePricesRouter.get("/",authMiddleware, updatePrices)
+updatePricesRouter.get("/", updatePrices)

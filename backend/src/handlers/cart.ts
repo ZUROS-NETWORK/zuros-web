@@ -14,7 +14,6 @@ export async function getCartById(c: Context) {
 export async function createCart(c: Context) {
   const db = c.env.DB
   const body = await c.req.json()
-console.log(body)
   if (!body.items || !Array.isArray(body.items)) {
     return c.json({ error: "Invalid cart format" }, 400)
   }

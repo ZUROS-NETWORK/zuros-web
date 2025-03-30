@@ -4,6 +4,7 @@ import { updatePricesRouter } from "./updatePrices"
 import { packagesRouter } from "./packages"
 import { categoriesRouter } from "./categories"
 import { cartRouter } from "./cart"
+import { checkoutHRouter } from "./checkout"
 
 export const router = new Hono()
 
@@ -13,3 +14,4 @@ router.route('/update', updatePricesRouter)
 router.route('/packages', packagesRouter)
 router.route('/categories', categoriesRouter)
 router.route('/cart', cartRouter)
+router.route('/checkout', checkoutHRouter)

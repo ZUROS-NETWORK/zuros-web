@@ -1,9 +1,9 @@
 import {getCategories, getPackages} from './tebex'
 
-export async function updatePackages(db: D1Database) {
-  const categories = await getCategories();
-console.log(categories)
-  for (const category of categories) {
+export async function updatePackages(db: D1Database, tebexToken:string) {
+  const categories = await getCategories(tebexToken);
+
+  for (const category of categories.data) {
     await db.prepare(`
       INSERT INTO category (id, name, description, slug, sort_order)
       VALUES (?, ?, ?, ?, ?)
@@ -20,9 +20,9 @@ console.log(categories)
     ).run();
   }
 
-  const packages = await getPackages();
+  const packages = await getPackages(tebexToken);
 
-  for (const pkg of packages) {
+  for (const pkg of packages.data) {
     await db.prepare(`
       INSERT INTO package (id, name, description, base_price, total_price, sales_tax, currency, sort_order, image, type, expiration_date, created_at, updated_at, category_id)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)

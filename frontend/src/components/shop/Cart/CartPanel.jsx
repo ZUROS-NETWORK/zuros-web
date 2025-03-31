@@ -1,15 +1,15 @@
-import { X, ShoppingCart, ChevronRight } from "lucide-react";
+import { X, ShoppingCart, ChevronRight, Loader } from "lucide-react";
 
 import { useCart } from '../../../context/CartContext';
 import './Cart.css'
 import { CartItem } from "./CartItem";
 import { useCheckout } from "../../../context/CheckoutContext";
+
 export function CartPanel() {
-  const { cartOpen, toggleCart, cart, updateQuantity, removeFromCart, cartTotal, } = useCart();
-  const {setOverlayOpen} = useCheckout()
+  const { cartOpen, cartLoading, toggleCart, cart, updateQuantity, removeFromCart, cartTotal } = useCart();
+  const { setOverlayOpen } = useCheckout();
 
   if (!cartOpen) return null;
-
 
   return (
     <div className="cart-overlay" onClick={toggleCart}>
@@ -24,7 +24,12 @@ export function CartPanel() {
           </button>
         </div>
 
-        {cart.length === 0 ? (
+        {cartLoading ? (
+          <div className="cart-empty">
+            <Loader className="cart-loading-icon" />
+            <p className="cart-empty-message">Cargando tu carrito...</p>
+          </div>
+        ) : cart.length === 0 ? (
           <div className="cart-empty">
             <ShoppingCart className="cart-icon-large" />
             <p className="cart-empty-message">Tu carrito está vacío</p>
@@ -33,19 +38,22 @@ export function CartPanel() {
             </button>
           </div>
         ) : (
-          <><div className="cart-items">
-            {cart.map((item) => (
-              <CartItem
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                price={item.total_price}
-                quantity={item.quantity}
-                image={item.image}
-                removeFromCartFn={removeFromCart}
-                updateQuantityFn={updateQuantity} />
-            ))}
-          </div><div className="cart-total">
+          <>
+            <div className="cart-items">
+              {cart.map((item) => (
+                <CartItem
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  price={item.total_price}
+                  quantity={item.quantity}
+                  image={item.image}
+                  removeFromCartFn={removeFromCart}
+                  updateQuantityFn={updateQuantity}
+                />
+              ))}
+            </div>
+            <div className="cart-total">
               <div className="cart-subtotal">
                 <span>Subtotal</span>
                 <span className="cart-subtotal-amount">${cartTotal.toFixed(2)} USD</span>
@@ -55,10 +63,11 @@ export function CartPanel() {
                 <span>Total</span>
                 <span className="cart-total-amount-value">${cartTotal.toFixed(2)} USD</span>
               </div>
-              <button className="cart-checkout-btn" onClick={()=> {setOverlayOpen(true); toggleCart()}}>
+              <button className="cart-checkout-btn" onClick={() => { setOverlayOpen(true); toggleCart(); }}>
                 Finalizar Compra <ChevronRight className="cart-icon-small" />
               </button>
-            </div></>
+            </div>
+          </>
         )}
       </div>
     </div>

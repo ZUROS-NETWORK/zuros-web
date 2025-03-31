@@ -8,13 +8,18 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const [cartLoading, setCartLoading] = useState(false);
   const [cartId, setCartId] = useState(localStorage.getItem("cartId"));
   const { packages } = useProductsContext()
-console.log(packages)
+
   async function fetchCart() {
     if (!cartId) return;
+    setCartLoading(true)
     const cartData = await getCart(cartId);
-    if (cartData) setCart(cartData);
+    if (cartData){ 
+      setCart(cartData);
+      setCartLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -29,10 +34,14 @@ console.log(packages)
     let updatedCart;
     
     if (!cartId) {
-      const newCartId = await createCart([{ id, quantity }]);
+      setCartLoading(true)
+      setCartOpen(true);
+      const newCartId = await createCart([{ id, quantity }])
+
       localStorage.setItem("cartId", newCartId);
       setCartId(newCartId);
       updatedCart = [{ ...product, quantity }];
+      setCartLoading(false)
     } else {
       const existingItem = cart.find((item) => item.id === id);
       if (existingItem) {
@@ -42,7 +51,7 @@ console.log(packages)
       } else {
         updatedCart = [...cart, { ...product, quantity }];
       }
-      await updateCart(cartId, updatedCart)
+       updateCart(cartId, updatedCart)
     }
     setCart(updatedCart);
     setCartOpen(true);
@@ -79,6 +88,7 @@ console.log(packages)
       value={{
         cart,
         cartOpen,
+        cartLoading,
         cartId,
         toggleCart: () => setCartOpen((prev) => !prev),
         addToCart,

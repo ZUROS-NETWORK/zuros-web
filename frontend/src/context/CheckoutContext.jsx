@@ -33,7 +33,7 @@ export const CheckoutProvider = ({ children }) => {
         }
       }, 4000);
 
-
+        Tebex.checkout.launch()
         Tebex.checkout.on("open", ()=> {clearTimeout(openTimeout); cancelCheckout()})
         Tebex.checkout.on("close", cancelCheckout)
         Tebex.checkout.on("payment:complete",completeCheckout)

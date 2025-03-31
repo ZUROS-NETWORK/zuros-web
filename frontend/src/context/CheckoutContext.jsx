@@ -3,6 +3,7 @@ import { LoginForm } from "../components/shop/Login/Login";
 import { getCheckoutId } from "../services/api";
 import { useCart } from "./CartContext";
 import Tebex from "@tebexio/tebex.js";
+import { CheckoutFail } from "../components/shop/CheckoutFail/CheckoutFail";
 
 const CheckoutContext = createContext();
 export const useCheckout = () => useContext(CheckoutContext);
@@ -17,7 +18,7 @@ export const CheckoutProvider = ({ children }) => {
     setOverlayContent(null)
     const checkoutId = await getCheckoutId({ id: cartId, username }).catch(()=>{
       cancelCheckout()
-    });
+    }); 
       Tebex.checkout.init({
                 ident: checkoutId+'/payment',
                 locale: 'es_ES',
@@ -26,9 +27,14 @@ export const CheckoutProvider = ({ children }) => {
         { name: "secondary", color: "#ec4899" }
     ]
             });
+      const openTimeout = setTimeout(() => {
+        if (checkoutId) {
+          setOverlayContent(<CheckoutFail />)
+        }
+      }, 4000);
 
-            Tebex.checkout.launch();
-        Tebex.checkout.on("open", cancelCheckout)
+
+        Tebex.checkout.on("open", ()=> {clearTimeout(openTimeout); cancelCheckout()})
         Tebex.checkout.on("close", cancelCheckout)
         Tebex.checkout.on("payment:complete",completeCheckout)
         Tebex.checkout.on("payment:error",cancelCheckout)

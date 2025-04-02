@@ -28,7 +28,6 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (id, quantity = 1) => {
     const product = packages.find((p) => p.id === id);
-    console.log(product)
     if (!product) return;
 
     let updatedCart;

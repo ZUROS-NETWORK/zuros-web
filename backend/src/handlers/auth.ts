@@ -27,7 +27,7 @@ export const loginHandler = async (c: Context) => {
 
   const user:any = await findUserByUsername(db, username)
   if (!user) {
-    return c.json({ error: 'Invalid username or password' }, 404)
+    return c.json({ error: 'Invalid username or password' }, 401)
   }
   if (await isAccountLocked(user)) {
     return c.json({ error: 'Account locked due to multiple failed login attempts' }, 403)

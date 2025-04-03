@@ -35,10 +35,11 @@ export async function createPackageHandler(c: Context) {
 export async function updatePackageHandler(c: Context) {
   const db = c.env.DB;
   const id = c.req.param("id");
+  const tebexSecret = c.env.TEBEX_PRIVATE_TOKEN;
 
   const data = await c.req.json();
 
-  const productUpdated = await updateProduct(db, id, data);
+  const productUpdated = await updateProduct(db,tebexSecret, id, data);
   if (!productUpdated) {
     return c.json({ error: "Product not found or no changes were made" }, 404);
   }

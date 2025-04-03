@@ -14,5 +14,6 @@
      "JWT_SECRET": "jwt secret",
      "JWT_EXPIRATION_HOURS": 1,
      "TEBEX_PUBLIC_TOKEN": "Public Token"
+     "TEBEX_PRIVATE_TOKEN": "Game server Token"
    }
 }

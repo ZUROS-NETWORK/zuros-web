@@ -1,4 +1,5 @@
 import { Package } from "../types/types";
+import { updateTebexPackage } from "./tebex";
 
 export async function getAllPackages(db: D1Database, categoryId?: string, categorySlug?: string) {
   let query = "SELECT * FROM package";
@@ -40,48 +41,63 @@ export async function createPackage(db: D1Database, data:Package) {
   return { ...data };
 }
 
-export async function updateProduct(db: D1Database, id: string, data: Package) {
-  const query = `
-    UPDATE package
-    SET 
-      name = ?, 
-      description = ?, 
-      short_description = ?, 
-      base_price = ?, 
-      total_price = ?, 
-      discount = ?, 
-      sales_tax = ?, 
-      currency = ?, 
-      sort_order = ?, 
-      image = ?, 
-      type = ?, 
-      expiration_date = ?, 
-      updated_at = ?, 
-      category_id = ?
-    WHERE id = ?`;
+export async function updateProduct(
+  db: D1Database, 
+  tebexSecret: string, 
+  id: string, 
+  data: Package
+): Promise<boolean> {
+  try {
+    await updateTebexPackage(tebexSecret, data.id, {
+      disabled: false,
+      name: data.name,
+      price: data.base_price,
+    });
+    const query = `
+      UPDATE package
+      SET 
+        name = ?, 
+        description = ?, 
+        short_description = ?, 
+        base_price = ?, 
+        total_price = ?, 
+        discount = ?, 
+        sales_tax = ?, 
+        currency = ?, 
+        sort_order = ?, 
+        image = ?, 
+        type = ?, 
+        expiration_date = ?, 
+        updated_at = ?, 
+        category_id = ?
+      WHERE id = ?`;
 
-  const params = [
-    data.name, 
-    data.description, 
-    data.short_description, 
-    data.base_price, 
-    data.total_price, 
-    data.discount, 
-    data.sales_tax, 
-    data.currency, 
-    data.sort_order, 
-    data.image, 
-    data.type, 
-    data.expiration_date, 
-    data.updated_at, 
-    data.category_id,
-    id
-  ];
+    const params = [
+      data.name, 
+      data.description, 
+      data.short_description, 
+      data.base_price, 
+      data.base_price,  
+      data.discount, 
+      data.sales_tax, 
+      data.currency, 
+      data.sort_order, 
+      data.image, 
+      data.type, 
+      data.expiration_date, 
+      data.updated_at, 
+      data.category_id,
+      id
+    ];
 
-  const result = await db.prepare(query).bind(...params).run();
+    const result = await db.prepare(query).bind(...params).run();
 
-  return result.meta.changes > 0;
+    return result.meta.changes > 0;
+  } catch (error) {
+    return false;
+  }
 }
+
 
 export async function deletePackage(db: D1Database, id: string) {
   try {
@@ -95,7 +111,6 @@ export async function deletePackage(db: D1Database, id: string) {
 
     return { success: true, message: `Package with ID ${id} deleted successfully.` };
   } catch (error:any) {
-    // Manejo de errores
     throw new Error(`Error deleting package: ${error.message}`);
   }
 }

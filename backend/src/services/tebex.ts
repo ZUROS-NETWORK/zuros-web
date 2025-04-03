@@ -93,3 +93,29 @@ export async function checkoutBasket(
 
   return basketId;
 }
+
+export async function updateTebexPackage(
+  tebexSecret: string,
+  packageId: number,
+  packageData: { disabled: boolean; name: string; price: number }
+): Promise<any> {
+  try {
+    const response = await fetch(`https://plugin.tebex.io/package/${packageId}`, {
+      method: "PUT",
+      headers: {
+        "X-Tebex-Secret": tebexSecret,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(packageData),
+    });
+    if (!response.ok) {
+      console.error(response)
+      throw new Error(`Error ${response.status}`);
+    }
+
+    return true
+  } catch (error) {
+    console.error("Error al actualizar el paquete:", error);
+    throw error;
+  }
+}

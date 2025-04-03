@@ -15,7 +15,7 @@ export const packageSchema = z.object({
     discount: z.number().min(0),
     currency: z.string().min(1, "Currency is required"),
     sort_order: z.number().int().min(0),
-    image: z.string().url().min(1, "Image URL is required"),
+    image: z.string().url().nullable(),
     type: z.string(),
     expiration_date: z.string().nullable(),
     created_at: z.string().nullable(),

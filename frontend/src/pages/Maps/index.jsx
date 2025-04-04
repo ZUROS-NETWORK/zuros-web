@@ -1,5 +1,5 @@
 const Maps = () =>{
- return <h1>Info</h1>;
+ return <a href="https://custom.zuros.xyz/">Ir al mapa</a>;
 }
 
 export default Maps;

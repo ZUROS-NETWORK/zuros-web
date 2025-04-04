@@ -41,6 +41,7 @@ justify-content: center;
 
 .presentation-text-large {
   font-size: 50px;
+  font-weight: bold;
 }
 
 .pink-button {

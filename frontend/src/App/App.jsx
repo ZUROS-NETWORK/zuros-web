@@ -5,7 +5,6 @@ import { Home } from "../pages/Home";
 import Info from "../pages/Info";
 import Maps from "../pages/Maps";
 import Error404 from "../components/Error/Error404";
-import ProductDetails from "../pages/ProductDetails";
 import Products from "../pages/Shop";
 import { Layout } from "../components/Layout/Layout";
 const LegalTerms = lazy(() => import("../pages/LegalTerms"));
@@ -13,10 +12,12 @@ import { Join } from "../pages/join";
 import { CartProvider } from "../context/CartContext";
 import { CheckoutProvider } from "../context/CheckoutContext";
 import { ProductsProvider } from "../context/ProductsContext";
+import { SEO } from "../components/Seo";
 
 function App() {
   return (
     <>
+    <SEO/>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />

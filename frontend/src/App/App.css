@@ -2,7 +2,21 @@
   --content-color: #424;
   --background-color: #ffff;
 }
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 body, #root{
   background: #fdf2f8;
   color: var(--content-color);
@@ -11,8 +25,21 @@ body, #root{
   font-family: Quicksand;
   font-size: large;
   flex: 1;
+  font-display: swap
 }
 a {
   text-decoration: none;
   color:deeppink;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Quicksand';
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+

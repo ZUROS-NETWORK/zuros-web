@@ -1,7 +1,7 @@
 const Info = () => {
   return (
     <section>
-      <p>Más información</p>
+      <h1>Más información</h1>
       <p>DISCOS DE ESTADO SÓLIDO</p>
       <p>
         No podemos prometer 20 TPS constantes, pero siempre intentamos hacer

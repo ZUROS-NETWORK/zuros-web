@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App/App.jsx'
 import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 const webhookURL = "https://discord.com/api/webhooks/1356078712973430814/IWy_sx69L43jZeMuOAv4mDKDP6jmrRtD_3NfKPvKvS08cOgdSpFzMZ9MtUdZtLkP6cKr"
-    
+
 const handleUnhandledRejection = (event) => {
     const payload = {
         content: `🚨 **Unhandled Promise Rejection** 🚨\n\n**Razón:** ${event.reason?.message || "Desconocida"}\n**Stack:**\n\`\`\`${event.reason?.stack || "No stack trace"}\`\`\``,
@@ -33,9 +34,11 @@ window.addEventListener("unhandledrejection", handleUnhandledRejection);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
-  <React.StrictMode>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <HelmetProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </HelmetProvider>
+    </React.StrictMode>,
 )

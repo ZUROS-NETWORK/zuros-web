@@ -1,0 +1,108 @@
+    .vision-text-center {
+        text-align: center;
+    }
+
+    .vision-badge {
+        display: inline-block;
+        background-color: #ffe4e6;
+        padding: 0.25rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    .vision-title {
+        font-size: 1.875rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .vision-subtitle {
+        max-width: 40rem;
+        margin: 0 auto;
+    }
+
+    .vision-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 4rem;
+    }
+
+    @media (min-width: 768px) {
+        .vision-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .vision-card {
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid;
+        transition: box-shadow 0.2s ease;
+    }
+
+    .vision-card:hover {
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .vision-card-icon {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .vision-icon {
+        width: 2rem;
+        height: 2rem;
+        color: white;
+    }
+
+    .vision-card h3 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .vision-card p {
+        text-align: center;
+    }
+
+    .vision-card.pink {
+        background: linear-gradient(to bottom right, #fff1f2, #ffe4e6);
+        border-color: #fecdd3;
+    }
+
+    .vision-card.pink .vision-card-icon {
+        background: linear-gradient(to bottom right, #f472b6, #ec4899);
+        box-shadow: 0 4px 10px #fecdd3;
+    }
+
+
+    .vision-card.purple {
+        background: linear-gradient(to bottom right, #f5f3ff, #ede9fe);
+        border-color: #ddd6fe;
+    }
+
+    .vision-card.purple .vision-card-icon {
+        background: linear-gradient(to bottom right, #a78bfa, #8b5cf6);
+        box-shadow: 0 4px 10px #ddd6fe;
+    }
+
+    .vision-card.blue {
+        background: linear-gradient(to bottom right, #eff6ff, #dbeafe);
+        border-color: #bfdbfe;
+    }
+
+    .vision-card.blue .vision-card-icon {
+        background: linear-gradient(to bottom right, #60a5fa, #3b82f6);
+        box-shadow: 0 4px 10px #bfdbfe;
+    }

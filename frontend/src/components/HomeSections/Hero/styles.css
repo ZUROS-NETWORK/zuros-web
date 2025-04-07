@@ -1,0 +1,23 @@
+.hero-image-box {
+    position: relative;
+    aspect-ratio: 4 / 3;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: rotateX(90deg);
+    transform-origin: bottom;
+    transition: all 1s ease-in-out;
+    backface-visibility: hidden;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: rotateX(0deg);
+}

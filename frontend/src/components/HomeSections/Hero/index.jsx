@@ -1,5 +1,6 @@
 import './styles.css'
 import { useEffect, useState } from 'react';
+import { Star } from 'lucide-react';
 
 const images = [
     '/img/ss/2.png',
@@ -19,40 +20,46 @@ const images = [
     '/img/ss/15.png'
 ];
 
-
 export default function HeroSection() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [prevIndex, setPrevIndex] = useState(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentIndex(prev => (prev + 1) % images.length);
+            setPrevIndex(currentIndex);
+            setCurrentIndex((currentIndex + 1) % images.length);
+
+            setTimeout(() => {
+                setPrevIndex(null);
+            }, 800);
         }, 8000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [currentIndex]);
 
     return (
         <section className="hero-content">
             <div className="hero-image-section">
                 <div className="hero-gradient-bg"></div>
                 <div className="hero-image-wrapper">
-                    <div className="hero-image-box image-flip">
-                        {images.map((img, i) => (
+                    <div className="hero-image-box">
+                         <img
+                            src={images[currentIndex]}
+                            className="hero-slide bottom"
+                            alt="Current"
+                        />
+                        {prevIndex !== null && (
                             <img
-                                key={i}
-                                src={img}
-                                loading="lazy"
-                                alt="Zuros network"
-                                className={`hero-slide ${i === currentIndex ? 'active' : ''}`}
+                                src={images[prevIndex]}
+                                className="hero-slide top animate-out"
+                                alt="Previous"
                             />
-                        ))}
+                        )}
+                       
                     </div>
                 </div>
                 <div className="hero-star-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-400">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
+                    <Star height='26px' width='26px' />
                 </div>
             </div>
 

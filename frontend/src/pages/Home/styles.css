@@ -19,7 +19,7 @@
 }
 
 .presentation-section {
-  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('http://localhost:5174/img/zuros-background.webp');
+  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('https://zuros.xyz/img/zuros-background.webp');
   background-repeat: no-repeat;
   
   border-radius: 20px;

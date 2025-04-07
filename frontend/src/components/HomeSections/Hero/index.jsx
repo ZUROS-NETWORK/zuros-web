@@ -58,8 +58,7 @@ export default function HeroSection() {
 
             <div className="hero-text-section">
                 <h2>Un servidor único para todos</h2>
-                <p>Zuros network es uno de los mejores y más exclusivos servidores de Minecraft survival y de minijuegos...</p>
-                <p>¡Esto significa que puedes conectarte usando tu PC, Mac, teléfono o incluso una consola!</p>
+                <p>Zuros network es uno de los mejores y más exclusivos servidores de Minecraft survival y de minijuegos. Aquí puedes disfrutar de una experiencia de Minecraft sin toxicidad, un lugar pacífico para todos. Fiel al juego, agregando muchas mejoras en la calidad de vida.</p>
             </div>
         </section>
     );

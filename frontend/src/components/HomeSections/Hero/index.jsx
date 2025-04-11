@@ -58,13 +58,13 @@ export default function HeroSection() {
                         <img
                             src={images[currentIndex]}
                             className="hero-slide bottom"
-                            alt={`Slide ${currentIndex + 1}`}
+                            alt={`Zuros, el mejor servidor de Minecraft ${currentIndex + 1}`}
                         />
                         {prevIndex !== null && (
                             <img
                                 src={images[prevIndex]}
                                 className="hero-slide top animate-out"
-                                alt={`Slide anterior (${prevIndex + 1})`}
+                                alt={`Zuros, el mejor servidor de Minecraft (${prevIndex + 1})`}
                             />
                         )}
                     </div>

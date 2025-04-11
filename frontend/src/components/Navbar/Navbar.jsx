@@ -11,7 +11,7 @@ const handleMenu = () => {
   return (
     <header>
       <div className="logo">
-        <img src="/icon3.png" alt="zuros network logo" />
+        <img src="/img/zuros-network-logo.png" alt="zuros network logo, servidor de minecraft" />
         <h1 className="logo-name">
           <span className="blue-logo">ZUROS </span>
           <span>NETWORK</span>

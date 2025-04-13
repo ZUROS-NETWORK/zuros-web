@@ -13,8 +13,6 @@ Este es el repositorio oficial del **sitio web de Zuros Network**, un servidor d
 
 ## 📁 Estructura del proyecto
 
-## 📁 Estructura del proyecto
-
 ```
 public/                              # Imágenes y recursos estáticos
   ├── fonts/            

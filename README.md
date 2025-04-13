@@ -1,6 +1,6 @@
 # Zuros Network 🌐
 
-**Zuros Network** es un servidor de Minecraft enfocado en ofrecer una experiencia pacífica, inclusiva y de alta calidad para jugadores de todas las plataformas. Compatible con Java y Bedrock, cuenta con modos como Survival, Skyblock, PvE, PvP, Parkour y más.
+**Zuros Network** es un servidor de Minecraft y una comunidad enfocada en ofrecer una experiencia pacífica, inclusiva y de alta calidad para todos los jugadores de todas las plataformas. Compatible con Java y Bedrock, cuenta con modos como Survival, Skyblock, PvE, PvP, Parkour y más.
 
 > 🌈 Sin toxicidad, sin pay-to-win, solo diversión y una comunidad agradable.
 
@@ -10,6 +10,13 @@
 - **Java:** `mc.zuros.xyz`
 - **Bedrock:** `be.zuros.xyz`  
   **Puerto:** `8126`
+
+## 📱 Enlaces útiles
+
+- 🌐 Sitio web: [https://zuros.xyz](https://zuros.xyz)
+- 💬 Discord: [https://discord.zuros.xyz](https://discord.zuros.xyz)
+- 🗺️ Mapa en vivo: [https://map.zuros.xyz](https://map.zuros.xyz)
+- 🛒 Tienda: [https://zuros.xyz/tienda](https://zuros.xyz/tienda)
 
 ## 🎮 Características del servidor
 
@@ -25,16 +32,6 @@
 - **Frontend:** React + Vite
 - **Backend:** hono.js + Cloudflare Workers + Tebex Api
 
----
-
-## 📱 Enlaces útiles
-
-- 🌐 Sitio web: [https://zuros.xyz](https://zuros.xyz)
-- 💬 Discord: [https://discord.zuros.xyz](https://discord.zuros.xyz)
-- 🗺️ Mapa en vivo: [https://map.zuros.xyz](https://map.zuros.xyz)
-- 🛒 Tienda: [https://zuros.xyz/tienda](https://zuros.xyz/tienda)
-
----
 
 ## 🚀 Cómo contribuir
 
@@ -48,5 +45,3 @@
 ## 🧾 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
----

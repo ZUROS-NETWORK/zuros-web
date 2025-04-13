@@ -3,14 +3,17 @@ import { useLocation } from 'react-router-dom';
 
 const pageData = {
   '/tienda': {
-    title: "Tienda de Zuros Network - Transforma Tu Aventura en Minecraft",
+    title: "Tienda de Zuros Network",
     description: "Descubre la tienda de Zuros Network y lleva tu experiencia de Minecraft al siguiente nivel. Personalizar tu mundo y has de cada partida una aventura única. zuros un espacio creado para todos. ¡Haz que tu travesía sea inolvidable!"
   },
   '/info': {
     title: "Acerca de Zuros Network - El Mejor Servidor de Minecraft",
     description: "Conoce más sobre Zuros Network, un servidor inclusivo y libre de toxicidad para jugadores de Minecraft."
   },
-
+  '/legal-terms': {
+    title: "Términos y condiciones de Zuros Network",
+    description: "Términos y condiciones de uso."
+  },
   default: {
     title: "ZUROS NETWORK - Servidor de Minecraft Survival y Minijuegos",
     description: "Únete a Zuros Network, un servidor de Minecraft inclusivo y libre de toxicidad. Compatible con Java y Bedrock."

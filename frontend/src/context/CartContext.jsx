@@ -15,7 +15,12 @@ export const CartProvider = ({ children }) => {
   async function fetchCart() {
     if (!cartId) return;
     setCartLoading(true)
-    const cartData = await getCart(cartId);
+    const cartData = await getCart(cartId).catch((error) => {
+      console.error("Error fetching cart:", error);
+      setCartLoading(false)
+      localStorage.removeItem("cartId");
+      setCartId(null);
+    } );
     if (cartData){ 
       setCart(cartData);
       setCartLoading(false)

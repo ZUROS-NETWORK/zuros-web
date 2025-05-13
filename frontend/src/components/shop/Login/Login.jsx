@@ -7,8 +7,14 @@ export const LoginForm = () => {
     const { username, setUsername, mcVersion, setMcVersion, proceedToCheckout } = useCheckout();
     const [error, setError] = useState("");
 
+        if (mcVersion === "bedrock") {
+            if (username && !username.startsWith('_')) {
+                setUsername('_' + username);
+            }
+        }
+
     const handleCheckout = () => {
-        if (!username.trim()) {
+        if (!username.trim() || username.trim() === "_") {
             setError("Por favor, ingresa un nombre de usuario.");
             return;
         }

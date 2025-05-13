@@ -1,0 +1,51 @@
+.cart-fixed-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+    z-index: 1;
+    padding-right: 10vw;
+}
+
+  @media screen and (max-width: 1300px) {
+    .cart-fixed-bar {
+        padding-right: 3px;
+        padding-top: 6px;
+    }
+  }
+  @media screen and (max-width: 420px) {
+    .cart-fixed-bar {
+        padding-right: 83px;
+        padding-top: 6px;
+    }
+  }
+.cart-bar-button {
+    position: fixed;
+    background-color: #ec407a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-bar-button:hover {
+    background-color: #d81b60;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: white;
+    color: #ec407a;
+    font-weight: bold;
+    border-radius: 12px;
+    border: 0.1px solid #ec407967;
+    padding: 1px 5px;
+}

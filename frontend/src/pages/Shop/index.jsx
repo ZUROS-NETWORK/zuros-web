@@ -1,5 +1,5 @@
 
-import { FloatingCartButton } from "../../components/shop/CartButton/CartButton";
+import { CartButton } from "../../components/shop/CartButton/CartButton";
 import { AlertTriangle } from "lucide-react";
 import "./styles.css";
 import {useProductsContext} from "../../context/ProductsContext";
@@ -24,7 +24,7 @@ const Products = () => {
     packageDetails
 
   } = useProductsContext();
-  const { toggleCart, addToCart } = useCart();
+  const { toggleCart, addToCart, cart } = useCart();
 
   return (
     <section className="categories-section">
@@ -76,7 +76,7 @@ const Products = () => {
           ))}
         </div>
       )}
-      <FloatingCartButton onClick={toggleCart} />
+      <CartButton onClick={toggleCart} itemCount={cart.length} />
     </section>
   );
 };

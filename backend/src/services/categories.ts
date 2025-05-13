@@ -1,13 +1,29 @@
 export async function getAllCategories(db: D1Database, includePackages?: string) {
-   const { results } = await db.prepare("SELECT * FROM category ORDER BY sort_order ASC").all();
-  return results 
+  const query = `
+  SELECT 
+    c.*, 
+    (SELECT COUNT(*) FROM package p WHERE p.category_id = c.id) as package_count
+  FROM category c
+  ORDER BY c.sort_order ASC
+`;
+const { results } = await db.prepare(query).all();
+return results; 
 }
 
 export async function getOneCategory(db: D1Database, idOrSlug?: string) {
   const { results } = await db
-    .prepare('SELECT * FROM category WHERE id = ? OR slug = ?')
+    .prepare(`
+      SELECT 
+        c.*, 
+        (SELECT COUNT(*) FROM package p WHERE p.category_id = c.id) as package_count
+      FROM category c
+      WHERE (c.id = ? OR c.slug = ?)
+    `)
     .bind(idOrSlug, idOrSlug)
     .all();
 
-  return results.length > 0 ? results[0] : null;
+  if (results.length > 0) {
+    return results
+  }
+  return null;
 }

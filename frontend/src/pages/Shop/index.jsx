@@ -40,16 +40,18 @@ const Products = () => {
         </div>}
 
       <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <button
-              className={`category-button ${selectedCategoryId === category.id ? "active" : ""}`}
-              onClick={() => setSelectedCategoryId(category.id)}
-            >
-              {category.name}
-            </button>
-          </li>
-        ))}
+      {categories
+          .filter(category => category.package_count > 0)
+          .map((category) => (
+            <li key={category.id}>
+              <button
+                className={`category-button ${selectedCategoryId === category.id ? "active" : ""}`}
+                onClick={() => setSelectedCategoryId(category.id)}
+              >
+                {category.name}
+              </button>
+            </li>
+          ))}
       </ul>
 
       {isLoading ? (

@@ -1,3 +1,4 @@
+# Este archivo existe únicamente para compilar el backend de Zuros
 name = "zuros-store-backend"
 main = "src/index.ts"
 compatibility_date = "2025-03-20"

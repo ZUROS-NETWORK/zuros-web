@@ -5,3 +5,7 @@ compatibility_date = "2025-03-20"
 keep_vars = true
 [observability.logs]
 enabled = true
+[[d1_databases]]
+binding = "DB"
+database_name = "zuros-store"
+database_id = "5bb9e1d4-90b8-41a8-91aa-4f1f8f07f3c8"

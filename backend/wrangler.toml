@@ -3,3 +3,5 @@ name = "zuros-store-backend"
 main = "src/index.ts"
 compatibility_date = "2025-03-20"
 keep_vars = true
+[observability.logs]
+enabled = true

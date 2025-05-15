@@ -33,7 +33,7 @@ export default function HeroSection() {
 
     useEffect(() => {
         if (!jsonLoaded && currentIndex === images.length - 2) {
-            fetch('https://cdn.zuros.xyz/slider-img-map.json')
+            fetch('https://cdn.zuros.xyz/nocache/slider-img-map.json')
                 .then(res => res.json())
                 .then(data => {
                     if (Array.isArray(data) && data.every(item => typeof item === 'string')) {

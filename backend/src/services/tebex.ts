@@ -12,8 +12,10 @@ async function getData(tebexToken: string, endpoint: string, method: string, bod
     body: body ? JSON.stringify(body) : null
   });
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Tebex API error: ${response.status} - ${errorText}`);
+    throw {
+      error: "Tebex API error",
+      response
+    };
   }
 
   return response.json();

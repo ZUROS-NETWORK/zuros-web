@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App/App.jsx'
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
-const webhookURL = "https://discord.com/api/webhooks/1356078712973430814/IWy_sx69L43jZeMuOAv4mDKDP6jmrRtD_3NfKPvKvS08cOgdSpFzMZ9MtUdZtLkP6cKr"
+const webhookURL = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
 
 const handleUnhandledRejection = (event) => {
     const payload = {

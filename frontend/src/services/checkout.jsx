@@ -1,38 +1,38 @@
-import Tebex from "@tebexio/tebex.js";
-export async function checkout({ id, username }) {
-   const currentUrl = window.location.origin
-   console.log(currentUrl)
-  const completeUrl = currentUrl + '/gracias'
-  const cancelUrl = currentUrl + '/join'
-  try {
-    Tebex.checkout.destroy();
-    const response = await fetch("http://localhost:8787/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id,
+import { checkoutBasket } from "./tebex.jsx";
+import { getCart } from "./api";
+const tebexToken = import.meta.env.VITE_TEBEX_PUBLIC_TOKEN
+export async function checkoutService({ cartId, username }) {
+  const cart = await getCart(cartId);
+  const baseUrl = window.location.origin;
+  const url = {
+    completeUrl: `${baseUrl}/gracias`,
+    cancelUrl: `${baseUrl}/tienda`,
+  };
+  if (!cart) {
+    throw new Error("El carrito está vacío o no existe.");
+  }
+
+  const maxAttempts = 3;
+  let attempt = 0;
+
+  while (attempt < maxAttempts) {
+    try {
+      return await checkoutBasket(tebexToken, cart, {
         username,
-        completeUrl,
-        cancelUrl
-      })
-    });
+        ...url,
+        customData: {},
+        autoRedirect: true,
+      });
+    } catch (error) {
+      const status = error?.response?.status;
 
-    if (!response.ok) {
-      throw new Error(`Error en la solicitud: ${response.statusText}`);
+      if (status >= 500 && status < 600) {
+        attempt++;
+        if (attempt === maxAttempts) throw error;
+        await new Promise((res) => setTimeout(res, 500));
+      } else {
+        throw error;
+      }
     }
-
-    const data = await response.json();
-    
-    if (!data.basketId) {
-      throw new Error("La respuesta no contiene un 'basketId' válido.");
-    }
-
-    Tebex.checkout.init({
-      ident: data.basketId,
-      locale: 'es_ES'
-    });
-    Tebex.checkout.launch();
-  } catch (error) {
-    console.error("Error en el checkout:", error);
   }
 }

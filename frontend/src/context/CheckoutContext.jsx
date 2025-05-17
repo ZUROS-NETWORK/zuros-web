@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import { LoginForm } from "../components/shop/Login/Login";
-import { getCheckoutId } from "../services/api";
 import { useCart } from "./CartContext";
 import Tebex from "@tebexio/tebex.js";
 import { CheckoutBlock } from "../components/shop/CheckoutFail/CheckoutBlock";
 import { CheckoutFail } from "../components/shop/CheckoutFail/CheckoutFail";
+import { checkoutService } from "../services/checkout";
 
 const CheckoutContext = createContext();
 export const useCheckout = () => useContext(CheckoutContext);
@@ -17,7 +17,7 @@ export const CheckoutProvider = ({ children }) => {
   const { cartId, deleteCart } = useCart()
   const proceedToCheckout = async () => {
     setOverlayContent(null)
-    const checkoutId = await getCheckoutId({ id: cartId, username }).catch(()=>{
+    const checkoutId = await checkoutService({ cartId , username }).catch(()=>{
       setOverlayContent(<CheckoutFail close={cancelCheckout} retry={()=>setOverlayContent(<LoginForm />)}  />)
     }); 
     if (!checkoutId) return;

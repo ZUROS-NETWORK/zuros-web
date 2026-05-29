@@ -1,5 +1,5 @@
 .presentation-section {
-  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('http://localhost:4321/img/Minecraft.gif') center center;
+  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('/presentation-background.png') center center;
   background-repeat: no-repeat;
   border-radius: 20px;
   background-size: cover;

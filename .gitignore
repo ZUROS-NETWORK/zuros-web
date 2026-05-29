@@ -1,4 +1,5 @@
 # Logs
+frontend-react
 logs
 *.log
 npm-debug.log*

@@ -1,0 +1,98 @@
+---
+import { BookOpenText, Gamepad2, House, Map, ShoppingBag } from 'lucide-astro';
+import './Navbar.css';
+---
+
+<header class="site-navbar">
+  <div class="logo">
+    <a href="/" class="logo-link">
+      <img src="/img/zuros-network-logo.png" alt="zuros network logo, servidor de minecraft" />
+    </a>
+  
+    <h1 class="logo-name">
+      <span class="blue-logo">ZUROS </span>
+      <span>NETWORK</span>
+    </h1>
+  </div>
+  <nav class="navbar" id="navbar-menu">
+    <ul>
+      <li class="go-home">
+        <a href="/">
+          <House size={20} />
+          Inicio
+        </a>
+      </li>
+
+      <li>
+        <a href="/tienda">
+          <ShoppingBag size={20} />
+          Tienda
+        </a>
+      </li>
+
+      <li>
+        <a href="https://map.zuros.xyz/" target="_blank" rel="noreferrer">
+          <Map size={20} />
+          Mapas
+        </a>
+      </li>
+
+      <li>
+        <a href="https://discord.zuros.xyz/" target="_blank" rel="noreferrer">
+          <Gamepad2 size={20} />
+          Discord
+        </a>
+      </li>
+
+      <li>
+        <a href="/info">
+          <BookOpenText size={20} />
+          Info
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <button class="mobile-navbar-button" id="mobile-menu-btn" aria-label="Abrir menú de navegación">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="navbar" /> 
+</header>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const navbarMenu = document.getElementById('navbar-menu');
+  const navLinks = navbarMenu?.querySelectorAll('a');
+
+  function toggleMenu() {
+    mobileMenuBtn?.classList.toggle('open');
+    navbarMenu?.classList.toggle('mobile-navbar-active');
+  }
+
+  function closeMenu() {
+    mobileMenuBtn?.classList.remove('open');
+    navbarMenu?.classList.remove('mobile-navbar-active');
+  }
+
+  mobileMenuBtn?.addEventListener('click', toggleMenu);
+
+  navLinks?.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Setup scroll event to toggle header background
+  const header = document.querySelector('header.site-navbar');
+  
+  function handleScroll() {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }
+
+  // Run on load and on scroll
+  handleScroll();
+  window.addEventListener('scroll', handleScroll);
+</script>

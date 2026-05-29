@@ -1,0 +1,58 @@
+.presentation-section {
+  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('http://localhost:4321/img/Minecraft.gif') center center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  background-size: cover;
+  padding: 30px;
+  width: 100%;
+  border-left: 6px solid #fdf2f8;
+  margin-bottom: 40px;
+}
+
+.presentation-section div {
+  width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+  .presentation-section {
+    width: 100%;
+    border-radius: 0px;
+  }
+
+  .presentation-section div {
+    width: 100%;
+  }
+}
+
+.presentation-text-large {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.pink-button {
+  background-color: deeppink;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.pink-button:hover {
+  background-color: rgb(253, 149, 205);
+}
+
+
+.blue-button {
+  background-color: rgb(20, 130, 255);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.blue-button:hover {
+  background-color: rgb(12, 107, 216);
+}

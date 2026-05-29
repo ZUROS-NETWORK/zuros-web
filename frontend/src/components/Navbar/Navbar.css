@@ -2,10 +2,18 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   position: fixed;
   width: 100%;
-  background-color: var(--background-color);
   z-index: 1;
+  background: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, transform 0.3s ease, padding-top 0.3s ease;
+}
+
+header.scrolled {
+  background: rgba(255, 255, 255, 0.253);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.055);
 }
 
 .logo {
@@ -16,10 +24,11 @@ header {
 
 .logo-name {
   color: hotpink;
-
+  font-size: 1.2rem;
+  font-weight: bold;
   .blue-logo {
     color: rgb(81, 229, 255);
-  }
+  };
 }
 
 .logo img {
@@ -31,58 +40,143 @@ header {
   list-style-type: none;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .navbar li {
-  margin: 0 0.5rem;
+  margin: 0 0.25rem;
 }
 
 .navbar a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   color: inherit;
+  font-size: 1.2rem;
+  font-weight: bold;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 30px;
 }
 
 .navbar a:hover {
-  background-color: #555;
+  background-color: rgba(0, 0, 0, 0.151);
 }
 
 .mobile-navbar-button {
   display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+  outline: none;
 }
 
-@media screen and (max-width: 800px) {
-  .navbar {
-    position: absolute;
-    top: -60px;
-    right: -1000px;
+.mobile-navbar-button span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--content-color, #424);
+  border-radius: 2px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animations for Hamburger to X */
+.mobile-navbar-button.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-navbar-button.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-navbar-button.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media screen and (max-width: 1000px) {
+  header {
+    justify-content: space-between;
+    padding: 0.75rem 3.5rem;
+    box-sizing: border-box;
+    align-items: center;
+  }
+ .logo-name {
+    display: block;
+  }
+  .logo {
+    margin-right: 0;
   }
 
   .mobile-navbar-button {
     display: flex;
   }
-}
 
-.mobile-navbar-active {
-  width: 100%;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  top: 99%;
-  left: 0;
-  right: 0;
-  text-align: center;
-  border-bottom: 1px inset var(--content-color);
-  transition: all .2s ease;
-  background-color: var(--background-color);
-}
+  .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.829);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.055);
+    border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.3s;
+    pointer-events: none;
+  }
 
-.mobile-navbar-active a {
-  font-size: 2rem;
-  margin-top: 1rem;
-  color: var(--content-color);
-}
+  .navbar.mobile-navbar-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 
-.mobile-navbar-active ul {
-  flex-direction: column;
+  .navbar ul {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar li {
+    width: 100%;
+    margin: 0;
+     border-bottom: 2px solid #000;
+  }
+  .navbar li:last-child {
+    border-bottom: none;
+  }
+
+  .navbar a {
+    display: flex;
+    padding: 0.85rem 1.5rem;
+    font-size: 2.5rem;
+    border-radius: 12px;
+  }
+  .navbar a svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .navbar a:hover {
+    background-color: rgba(236, 72, 153, 0.08);
+    color: deeppink;
+    transform: scale(1.02);
+  }
 }

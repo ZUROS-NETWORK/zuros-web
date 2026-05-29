@@ -3,12 +3,12 @@
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 50;
-    top: 57px;
+    top: 76px;
 }
 
 .cart-panel {
     position: fixed;
-    top: 57px;
+    top: 76px;
     right: 0;
     width: 100%;
     max-width: 400px;

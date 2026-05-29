@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Shop from "../components/shop/Shop";
+---
+
+<Layout
+  title="Tienda Oficial - Zuros Network"
+  description="Apoya a Zuros Network adquiriendo rangos y beneficios en nuestra tienda."
+  keywords="Tienda Zuros Network, comprar rangos Minecraft, rangos VIP, donaciones Zuros"
+  ogTitle="Tienda Oficial de Zuros Network - Rangos y Beneficios"
+  ogDescription="Apoya el mantenimiento de nuestro servidor Zuros Network adquiriendo rangos y beneficios en nuestra tienda."
+>
+  <Shop client:only="react" />
+</Layout>

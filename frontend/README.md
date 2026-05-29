@@ -1,13 +1,14 @@
 # Zuros Network — Frontend 🌐
 
-Este es el repositorio oficial del **sitio web de Zuros Network**, un servidor de Minecraft multijugador con una comunidad pacífica, inclusiva y sin toxicidad. Este frontend está construido con **React + Vite** y optimizado para ofrecer rendimiento, responsividad y buen SEO.
+Este es el repositorio oficial del **sitio web de Zuros Network**, un servidor de Minecraft multijugador con una comunidad pacífica, inclusiva y sin toxicidad. Este frontend está construido con **Astro + React** y optimizado para ofrecer rendimiento, responsividad y buen SEO.
 
 ## 🛠️ Tecnologías
 
-- ⚛️ **React** — Librería principal para la interfaz de usuario
+- 🚀 **Astro** — Librería principal para la interfaz de usuario
+- ⚛️ **React** — Librería utilizada para la interfaz en la tienda
 - 🎨 **CSS puro** — Diseño rápido y adaptativo
 - 🔗 **React Router** — Enrutamiento SPA
-- 🧠 **Lucide-react** — Íconos SVG simples y limpios
+- 🧠 **Lucide** — Íconos SVG simples y limpios
 - ☁️ **Tebex.js** (utilizado únicamente como **pasarela de pagos** desde el  [backend](https://github.com/ZUROS-NETWORK/zuros-web/tree/main/backend))
 ---
 
@@ -55,7 +56,7 @@ npm run preview
 
 ## 🚧 En desarrollo
 
-- [ ] Conversión parcial a Astro para mejor SEO
+- [X] Conversión parcial a Astro para mejor SEO
 - [ ] Agregar modo oscuro
 - [ ] Refactor de CSS a un sistema de estilos más consistente en toda la web
 - [ ] Mejorar SEO

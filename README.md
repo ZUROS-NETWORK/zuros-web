@@ -29,7 +29,7 @@
 
 ## 📦 Tecnologías utilizadas
 
-- **Frontend:** React + Vite
+- **Frontend:** Astro + React
 - **Backend:** hono.js + Cloudflare Workers + Tebex Api
 
 

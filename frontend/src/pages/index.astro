@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HomeSections/Hero/Hero.astro';
+import PlatformCards from '../components/HomeSections/PlatformCards/PlatformCards.astro';
+import VisionCards from '../components/HomeSections/VisionCards/VisionCards.astro';
+import Presentation from '../components/HomeSections/Presentation/Presentation.astro';
+---
+
+<Layout
+  title="ZUROS NETWORK - Servidor de Minecraft Survival y Minijuegos"
+  description="Zuros Network - Servidor inclusivo de Minecraft sin toxicidad, compatible con Java y Bedrock."
+  keywords="Minecraft, Servidor Minecraft, Java, Bedrock, LGBTQ+ Friendly, Minijuegos, Survival, Comunidad Minecraft"
+  ogTitle="Zuros Network - Servidor de Minecraft Survival y Minijuegos"
+  ogDescription="Únete a Zuros Network, un servidor inclusivo y libre de toxicidad, compatible con Minecraft Java y Bedrock."
+  ogImage="/presentation-background.png"
+>
+   <Presentation />
+  <HeroSection />
+
+  <section id="join">
+    <PlatformCards />
+  </section>
+
+  <section class="vision-section">
+    <VisionCards />
+  </section>
+</Layout>
+
+<style>
+.vision-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vision-section .vision-cards {
+  display: flex;
+  gap: 30px;
+}
+
+.vision-cards {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.vision-column {
+  max-width: 300px;
+}
+
+.presentation-section {
+  background: linear-gradient(to right, #fdf2f8, #fdf2f88e), url('http://localhost:5173/img/Minecraft.gif') center center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  background-size: cover;
+  padding: 30px;
+  width: 100%;
+  border-left: 6px solid #fdf2f8;
+  margin-bottom: 40px;
+}
+
+.presentation-section div {
+  width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+  .presentation-section {
+    width: 100%;
+    border-radius: 0px;
+  }
+
+  .presentation-section div {
+    width: 100%;
+  }
+}
+
+.presentation-text-large {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.pink-button {
+  background-color: deeppink;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.pink-button:hover {
+  background-color: rgb(253, 149, 205);
+}
+
+
+.blue-button {
+  background-color: rgb(20, 130, 255);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.blue-button:hover {
+  background-color: rgb(12, 107, 216);
+}
+</style>

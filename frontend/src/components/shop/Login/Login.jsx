@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useCheckout } from "../../../context/CheckoutContext";
+import { useCheckout } from "../context/CheckoutContext";
 import { useState } from "react";
 
 

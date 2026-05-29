@@ -1,0 +1,130 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Home, ShoppingBag, Gamepad2 } from "lucide-astro";
+---
+
+<Layout
+  title="Página No Encontrada - Zuros Network"
+  description="¡Un creeper ha explotado este bloque! La página que buscas no existe o ha sido movida."
+  keywords="404, página no encontrada, creeper, error 404, Zuros Network"
+  ogTitle="404 — Página no encontrada"
+  ogDescription="¡Boom! La página que buscas fue minada o destruida por un creeper."
+>
+  <div class="error-container">
+    
+      <h2 class="error-title">404 — ¡Creeper explotó la página! 💥</h2>
+      <p class="error-description">
+        Parece que el bloque que buscas fue minado… o un Creeper lo hizo desaparecer.
+La página que intentas abrir no existe.
+      </p>
+
+      <div class="error-actions">
+        <a href="/" class="btn-primary">
+          <Home size={18} />
+          Volver al Inicio
+        </a>
+        <a href="/tienda" class="btn-secondary">
+          <ShoppingBag size={18} />
+          Tienda Zuros
+        </a>
+        <a
+          href="https://discord.zuros.xyz/"
+          target="_blank"
+          rel="noreferrer"
+          class="btn-discord"
+        >
+          <Gamepad2 size={18} />
+          Discord
+        </a>
+      </div>
+  </div>
+</Layout>
+
+<style>
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    gap: 3rem;
+    box-sizing: border-box;
+  }
+
+  
+  .error-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(
+      135deg,
+      #47a036 0%,
+      #357828 50%,
+      rgb(255, 215, 85) 100%
+    );
+    background-clip: text;
+    color: transparent;
+  }
+
+
+
+
+  .error-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.8rem;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #ff00d4, #00ff15);
+    color: white;
+    box-shadow: 0 4px 15px rgba(71, 160, 54, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(219, 24, 210, 0.5);
+    background: linear-gradient(135deg, #d620a0, #47a036);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: #332233 !important;
+    border: 2px solid rgba(71, 160, 54, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-3px);
+    background-color: rgba(71, 160, 54, 0.05);
+    border-color: #a0369b;
+    color: #b123e9 
+  }
+
+  .btn-discord {
+    background: #5865f2;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+  }
+
+  .btn-discord:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+    background: #4752c4;
+  }
+
+  .error-actions a:active {
+    transform: translateY(-1px);
+  }
+</style>

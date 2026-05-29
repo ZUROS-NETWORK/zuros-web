@@ -1,0 +1,112 @@
+---
+import { Star } from 'lucide-astro';
+import './styles.css';
+---
+
+<section class="hero-content">
+  <div class="hero-image-section">
+    <div class="hero-gradient-bg"></div>
+    <div class="hero-image-wrapper">
+      <div class="hero-image-box">       
+        <img
+          id="hero-current"
+          class="hero-slide bottom"
+          src="/img/hero-slider/1744356997526.webp"
+          alt="Zuros, el mejor servidor de Minecraft 1"
+        />
+        <img
+          id="hero-prev"
+          class="hero-slide top"
+          style="display: none;"
+          alt=""
+        />
+   
+      </div>
+    </div>
+    <div class="hero-star-icon">
+      <Star size={26} />
+    </div>
+  </div>
+
+  <div class="hero-text-section">
+    <h2>Un servidor único para todos</h2>
+    <p>
+      Zuros network es uno de los mejores y más exclusivos servidores de Minecraft survival y de minijuegos.
+      Aquí puedes disfrutar de una experiencia sin toxicidad, un lugar pacífico para todos.
+      Fiel al juego, con muchas mejoras en la calidad de vida.
+    </p>
+  </div>
+</section>
+
+
+<script>
+  const initialImages = [
+    '/img/hero-slider/1744356997526.webp',
+    '/img/hero-slider/1744357168337.webp',
+    '/img/hero-slider/1744357333135.webp',
+    '/img/hero-slider/1744357265973.webp',
+    '/img/hero-slider/1744357401352.webp',
+    '/img/hero-slider/1744357554993.webp',
+    '/img/hero-slider/1744357514740.webp',
+  ];
+
+  let images = [...initialImages];
+  let currentIndex = 0;
+  let jsonLoaded = false;
+  let cleanupTimeout: any = null;
+
+    const currentImage = document.getElementById('hero-current') as HTMLImageElement;
+    const prevImage = document.getElementById('hero-prev') as HTMLImageElement;
+
+    function preloadImage(url: string) {
+      const img = new Image();
+      img.src = url;
+    }
+  if (currentImage) {
+    currentImage.src = images[0];
+    preloadImage(images[1]);
+  }
+
+    function showNextSlide() {
+      if (!currentImage || !prevImage) return;
+      const nextIndex = (currentIndex + 1) % images.length;
+      const tempImg = new Image();
+      tempImg.src = images[nextIndex];
+      
+      tempImg.onload = () => {
+        prevImage.src = currentImage.src;
+        prevImage.style.display = 'block';
+        prevImage.classList.add('animate-out');
+        currentIndex = nextIndex;
+        currentImage.src = images[currentIndex];
+        currentImage.alt = `Zuros, el mejor servidor de Minecraft ${currentIndex + 1}`;
+        const nextNextIndex = (currentIndex + 1) % images.length;
+        preloadImage(images[nextNextIndex]);
+        if (!jsonLoaded && currentIndex === images.length - 2) {
+          fetch('https://cdn.zuros.xyz/nocache/slider-img-map.json')
+            .then(res => res.json())
+            .then(data => {
+              if (Array.isArray(data) && data.every(item => typeof item === 'string')) {
+                images = [...images, ...data];
+                jsonLoaded = true;
+              }
+            })
+            .catch(err => console.error('Error fetching images:', err));
+        }
+        if (cleanupTimeout) {
+          clearTimeout(cleanupTimeout);
+        }
+
+        cleanupTimeout = setTimeout(() => {
+          prevImage.style.display = 'none';
+          prevImage.classList.remove('animate-out');
+        }, 1200); // 1.2s matches CSS animation duration
+      };
+
+      tempImg.onerror = () => {
+        currentIndex = nextIndex;
+      };
+    }
+
+  setInterval(showNextSlide, 8000);
+</script>

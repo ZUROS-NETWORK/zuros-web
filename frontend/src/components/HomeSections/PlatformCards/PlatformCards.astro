@@ -1,0 +1,163 @@
+---
+import { Monitor, Smartphone, Gamepad } from "lucide-astro";
+import "./styles.css";
+---
+
+<div class="platforms-text-center platforms-mb-16">
+  <h2 class="platforms-section-title">Juega en cualquier plataforma</h2>
+  <p class="platforms-description">
+    Conéctate a nuestro servidor desde cualquier dispositivo. ¡Todos son
+    bienvenidos!
+  </p>
+</div>
+
+<div class="platforms-card-grid">
+  <!-- Java -->
+  <div class="platforms-card">
+    <div class="platforms-card-header platforms-header-blue"></div>
+    <div class="platforms-card-content">
+      <div class="platforms-icon-wrapper platforms-icon-blue">
+        <Monitor size={40} />
+      </div>
+      <h3 class="platforms-card-title">Jugar en Java</h3>
+      <p class="platforms-card-text">
+        Conéctate desde tu PC con Windows, Mac o Linux usando la versión Java de
+        Minecraft.
+      </p>
+      <button
+        class="platforms-card-button platforms-btn-blue"
+        data-platform="java"
+      >
+        Windows/Mac/Linux
+      </button>
+
+      <div class="platforms-mobile-only">
+        <div class="platforms-card-extra" data-platform-extra="java" hidden>
+          <p>
+            Haga click en Multijugador, agregar un servidor, inserte esta IP:
+          </p>
+          <code>mc.zuros.xyz</code>
+          <p>&nbsp;luego guarde y conéctese</p>
+          <p>En caso de no funcionar puede probar la IP alternativa</p>
+          <code>be.zuros.xyz:25568</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bedrock -->
+  <div class="platforms-card">
+    <div class="platforms-card-header platforms-header-pink"></div>
+    <div class="platforms-card-content">
+      <div class="platforms-icon-wrapper platforms-icon-pink">
+        <Smartphone size={40} />
+      </div>
+      <h3 class="platforms-card-title">Jugar en Bedrock</h3>
+      <p class="platforms-card-text">
+        Conéctate desde tu dispositivo móvil o PC con Windows 10/11 usando
+        Minecraft Bedrock.
+      </p>
+      <button
+        class="platforms-card-button platforms-btn-pink"
+        data-platform="bedrock"
+      >
+        Android/iOS/Windows
+      </button>
+
+      <div class="platforms-mobile-only">
+        <div class="platforms-card-extra" data-platform-extra="bedrock" hidden>
+          <p>
+            Haga click en jugar, luego haga click en servidores y agregar un
+            servidor, en nombre Zuros y en IP inserte:
+          </p>
+          <code>be.zuros.xyz</code>
+          <p>y en Puerto inserte</p>
+          <code>8126</code>
+          <p>luego guardar y conéctese</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Console -->
+  <div class="platforms-card">
+    <div class="platforms-card-header platforms-header-purple"></div>
+    <div class="platforms-card-content">
+      <div class="platforms-icon-wrapper platforms-icon-purple">
+        <Gamepad size={40} />
+      </div>
+      <h3 class="platforms-card-title">Jugar en Consola</h3>
+      <p class="platforms-card-text">
+        Conéctate desde tu consola de videojuegos usando la versión Bedrock de
+        Minecraft.
+      </p>
+      <button
+        class="platforms-card-button platforms-btn-purple"
+        data-platform="console"
+      >
+        Switch/PS4/PS5/Xbox
+      </button>
+
+      <div class="platforms-mobile-only">
+        <div class="platforms-card-extra" data-platform-extra="console" hidden>
+          <p>
+            Minecraft Bedrock Edition también se ejecuta en consolas, pero los
+            fabricantes han restringido las capacidades multijugador de terceros
+            por razones legales (muy cuestionables).
+          </p>
+          <p>Para ello necesitas un dispositivo móvil</p>
+          <a href="https://zuros.xyz/join#android">Tutorial desde Android</a><br
+          />
+          <a href="https://zuros.xyz/join#ios">Tutorial desde iOS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="platforms-desktop-only" id="platforms-extra-display"></div>
+
+<script>
+  const buttons = document.querySelectorAll(".platforms-card-button");
+  const desktopContainer = document.getElementById("platforms-extra-display");
+  const allExtras = document.querySelectorAll(
+    ".platforms-card-extra",
+  ) as NodeListOf<HTMLElement>;
+
+  function closeAll() {
+    allExtras.forEach((extra) => {
+      extra.hidden = true;
+    });
+    if (desktopContainer) {
+      desktopContainer.innerHTML = "";
+      desktopContainer.style.display = "none";
+    }
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const platform = button.getAttribute("data-platform");
+      const extra = document.querySelector(
+        `.platforms-card-extra[data-platform-extra="${platform}"]`,
+      ) as HTMLElement;
+
+      if (!extra) return;
+
+      const isCurrentlyVisible = !extra.hidden;
+
+      // Close everything first
+      closeAll();
+
+      // If it wasn't visible, open it
+      if (!isCurrentlyVisible) {
+        extra.hidden = false;
+
+        // On desktop, copy content to desktop container as well
+        if (desktopContainer) {
+          desktopContainer.innerHTML = `<div class="platforms-card-extra">${extra.innerHTML}</div>`;
+          desktopContainer.style.display = "block";
+        }
+      }
+    });
+  });
+</script>

@@ -1,5 +1,5 @@
 import "./LoginOverlay.css";
-import { useCheckout } from "../../../context/CheckoutContext";
+import { useCheckout } from "../context/CheckoutContext";
 
 export const LoginOverlay = () => {
     const { OverlayOpen, overlayContent } = useCheckout();

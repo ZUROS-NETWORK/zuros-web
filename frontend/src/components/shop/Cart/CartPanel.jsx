@@ -1,9 +1,9 @@
 import { X, ShoppingCart, ChevronRight, Loader } from "lucide-react";
 
-import { useCart } from '../../../context/CartContext';
+import { useCart } from '../context/CartContext';
 import './Cart.css'
 import { CartItem } from "./CartItem";
-import { useCheckout } from "../../../context/CheckoutContext";
+import { useCheckout } from "../context/CheckoutContext";
 
 export function CartPanel() {
   const { cartOpen, cartLoading, toggleCart, cart, updateQuantity, removeFromCart, cartTotal } = useCart();

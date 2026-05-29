@@ -1,0 +1,89 @@
+---
+import Navbar from '../components/Navbar/Navbar.astro';
+import Footer from '../components/Footer/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
+import './App.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  twitterCard?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title = "ZUROS NETWORK - Servidor de Minecraft Survival y Minijuegos",
+  description = "Zuros Network - Servidor inclusivo de Minecraft sin toxicidad, compatible con Java y Bedrock.",
+  keywords = "Minecraft, Servidor Minecraft, Java, Bedrock, LGBTQ+ Friendly, Minijuegos, Survival",
+  ogTitle = "Zuros Network - Servidor de Minecraft Survival y Minijuegos",
+  ogDescription = "Únete a Zuros Network, un servidor inclusivo y libre de toxicidad, compatible con Minecraft Java y Bedrock.",
+  ogImage = "/presentation-background.png",
+  ogUrl,
+  twitterCard = "summary_large_image",
+  twitterTitle = "Zuros Network - Servidor de Minecraft Survival y Minijuegos",
+  twitterDescription = "Servidor inclusivo de Minecraft, libre de toxicidad y 100% LGBTQ+ Friendly.",
+  twitterImage = "/presentation-background.png",
+  canonicalUrl
+} = Astro.props;
+
+const canonical = canonicalUrl || new URL(Astro.url.pathname, 'https://zuros.xyz').toString();
+const finalOgUrl = ogUrl || canonical;
+
+const navItems = [
+  { href: '/', label: 'Inicio' },
+  { href: '/tienda', label: 'Tienda' },
+  { href: 'https://map.zuros.xyz/', label: 'Mapas', external: true },
+  { href: 'https://discord.zuros.xyz/', label: 'Discord', external: true },
+  { href: '/info', label: 'Info' }
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Zuros Network" />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={finalOgUrl} />
+    <meta property="og:site_name" content="Zuros Network" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content={twitterCard} />  
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
+    <meta name="twitter:image" content={twitterImage} />
+
+    <ClientRouter />
+  </head>
+  <body>
+	<Navbar />
+    <main>
+      <slot />
+    </main>
+	<Footer />
+  </body>
+</html>

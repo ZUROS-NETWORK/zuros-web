@@ -14,10 +14,10 @@ export const CheckoutProvider = ({ children }) => {
   const [mcVersion, setMcVersion] = useState('java');
   const [OverlayOpen, setOverlayOpen] = useState(false);
   const [overlayContent, setOverlayContent] = useState(<LoginForm />);
-  const { cartId, deleteCart } = useCart()
+  const { cart, deleteCart } = useCart()
   const proceedToCheckout = async () => {
     setOverlayContent(null)
-    const checkoutId = await checkoutService({ cartId , username }).catch(()=>{
+    const checkoutId = await checkoutService({ cart , username }).catch(()=>{
       setOverlayContent(<CheckoutFail close={cancelCheckout} retry={()=>setOverlayContent(<LoginForm />)}  />)
     }); 
     if (!checkoutId) return;

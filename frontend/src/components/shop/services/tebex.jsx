@@ -64,3 +64,9 @@ export async function checkoutBasket(
 
   return basketId;
 }
+
+export async function getCategoriesAndPackages(tebexToken) {
+  const result = await getData(tebexToken, 'categories?includePackages=1', 'GET');
+  console.log(result)
+  return result.data || [];
+}

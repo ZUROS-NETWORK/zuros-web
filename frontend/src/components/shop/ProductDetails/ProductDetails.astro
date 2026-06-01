@@ -1,0 +1,41 @@
+---
+import { X } from "lucide-astro";
+import "./ProductDetails.css";
+
+interface Props {
+  product: any;
+}
+
+const { product } = Astro.props;
+const originalPrice = product.discount > 0 ? product.total_price / (1 - product.discount / 100) : null;
+---
+
+<style>
+  .product-details-overlay.hidden {
+    display: none;
+  }
+</style>
+
+<div class="product-details-overlay hidden" id={`details-modal-${product.id}`}>
+  <div class="product-details-container">
+    <div class="product-details-title-bar">
+      <h2 class="product-details-name">{product.name}</h2>
+      <button class="details-close-button details-close-trigger" data-close-id={product.id} aria-label="Cerrar detalles">
+        <X class="details-close-button-icon" />
+      </button>
+    </div>
+    <div class="product-details-info">
+      <img
+        src={product.image}
+        alt={product.name}
+        class="product-details-image"
+      />
+      <div class="product-details-description" set:html={product.description} />
+    </div>
+    <div class="product-details-price">
+      {originalPrice && <p class="old-price">${originalPrice.toFixed(2)} {product.currency}</p>}
+      <p class="new-price">${product.total_price.toFixed(2)} USD</p>
+    </div>
+    <button class="add-to-cart btn-add-to-cart-trigger" data-product={JSON.stringify(product)} data-close-after="true">Agregar al carrito</button>
+  </div>
+</div>

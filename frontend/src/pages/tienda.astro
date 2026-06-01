@@ -1,6 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Shop from "../components/shop/Shop";
+import ShopCart from "../components/shop/ShopCart";
+import { getCategoriesAndPackages } from "../components/shop/services/tebex.jsx";
+import { ShopBanner } from "../components/shop/ShopBanner/ShopBanner";
+import ProductCard from "../components/shop/Card/ProductCard.astro";
+import ProductDetails from "../components/shop/ProductDetails/ProductDetails.astro";
+import { AlertTriangle } from "lucide-astro";
+import "../components/shop/styles.css";
+
+const tebexToken = import.meta.env.PUBLIC_TEBEX_PUBLIC_TOKEN || import.meta.env.VITE_TEBEX_PUBLIC_TOKEN;
+
+let categories = [];
+let allPackages = [];
+let error = null;
+const defaultCategoryId = 2154552;
+
+try {
+  categories = await getCategoriesAndPackages(tebexToken);
+  
+  // Extract and normalize all packages from categories
+  categories.forEach((cat) => {
+    if (cat.packages && cat.packages.length > 0) {
+      cat.packages.forEach((pkg) => {
+        allPackages.push({
+          ...pkg,
+          category_id: cat.id
+        });
+      });
+    }
+  });
+} catch (e) {
+  console.error("Error loading shop data from Tebex:", e);
+  error = e;
+}
+
+const activeCategories = categories.filter((category) => category.packages && category.packages.length > 0);
 ---
 
 <Layout
@@ -10,5 +44,137 @@ import Shop from "../components/shop/Shop";
   ogTitle="Tienda Oficial de Zuros Network - Rangos y Beneficios"
   ogDescription="Apoya el mantenimiento de nuestro servidor Zuros Network adquiriendo rangos y beneficios en nuestra tienda."
 >
-  <Shop client:only="react" />
+  <section class="categories-section">
+    <ShopBanner />
+
+    {error && (
+      <div class="error-message">
+        <AlertTriangle />
+        <span>Ups... algo salió mal. Intenta nuevamente más tarde.</span>
+        <span>Si el problema persiste, contacta a un administrador.</span>
+      </div>
+    )}
+
+    {!error && (
+      <ul>
+        {activeCategories.map((category) => (
+          <li>
+            <button
+              class={`category-button ${category.id === defaultCategoryId ? "active" : ""}`}
+              data-category-id={category.id}
+            >
+              {category.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {!error && (
+      <div class="product-grid">
+        {allPackages.map((packageItem) => (
+          <ProductCard
+            product={packageItem}
+            defaultVisible={packageItem.category_id === defaultCategoryId}
+          />
+        ))}
+      </div>
+    )}
+
+    {!error && allPackages.map((packageItem) => (
+      <ProductDetails product={packageItem} />
+    ))}
+
+    <ShopCart client:only="react" />
+  </section>
 </Layout>
+
+<script>
+  // Dynamic client-side category filtering
+  const categoryButtons = document.querySelectorAll(".category-button");
+  const productCards = document.querySelectorAll(".product-card");
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Remove active class from all buttons
+      categoryButtons.forEach((btn) => btn.classList.remove("active"));
+      // Add active class to clicked button
+      button.classList.add("active");
+
+      const selectedId = button.getAttribute("data-category-id");
+      productCards.forEach((card) => {
+        const cardCategory = card.getAttribute("data-category-id");
+        const htmlCard = card as HTMLElement;
+        if (cardCategory === selectedId) {
+          htmlCard.style.display = "";
+        } else {
+          htmlCard.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // Details Modal Triggering and Card Clicks
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+
+    // Check if clicked inside a Details Trigger
+    const detailsTrigger = target.closest(".btn-details-trigger");
+    if (detailsTrigger) {
+      e.preventDefault();
+      const card = detailsTrigger.closest(".product-card");
+      if (card) {
+        const productId = card.getAttribute("data-product-id");
+        const modal = document.getElementById(`details-modal-${productId}`);
+        if (modal) {
+          modal.classList.remove("hidden");
+        }
+      }
+    }
+
+    // Check if clicked inside a Close Details Trigger
+    const closeTrigger = target.closest(".details-close-trigger");
+    if (closeTrigger) {
+      e.preventDefault();
+      const modalId = closeTrigger.getAttribute("data-close-id");
+      const modal = document.getElementById(`details-modal-${modalId}`);
+      if (modal) {
+        modal.classList.add("hidden");
+      }
+    }
+
+    // Close modal when clicking outside container (on the overlay itself)
+    const detailsOverlay = target.closest(".product-details-overlay");
+    if (detailsOverlay && target === detailsOverlay) {
+      e.preventDefault();
+      detailsOverlay.classList.add("hidden");
+    }
+
+    // Add to Cart Event Dispatcher
+    const addToCartTrigger = target.closest(".btn-add-to-cart-trigger");
+    if (addToCartTrigger) {
+      e.preventDefault();
+      const productDataStr = addToCartTrigger.getAttribute("data-product");
+      if (productDataStr) {
+        try {
+          const product = JSON.parse(productDataStr);
+          window.dispatchEvent(
+            new CustomEvent("add-to-cart", {
+              detail: { product, quantity: 1 },
+            })
+          );
+          
+          // Optionally close the details modal after adding
+          if (addToCartTrigger.getAttribute("data-close-after") === "true") {
+            const overlay = addToCartTrigger.closest(".product-details-overlay");
+            if (overlay) {
+              overlay.classList.add("hidden");
+            }
+          }
+        } catch (err) {
+          console.error("Error parsing product JSON for cart:", err);
+        }
+      }
+    }
+  });
+</script>

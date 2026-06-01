@@ -1,0 +1,70 @@
+---
+import "./ProductCard.css";
+
+interface Props {
+  product: any;
+  defaultVisible: boolean;
+}
+
+const { product, defaultVisible } = Astro.props;
+const { id, image, name, short_description, base_price, total_price, discount, currency } = product;
+
+function parseProductName(text) {
+  if (!text) return null;
+  const regex = /(.*?)\s*\[(.*?)\]/;
+  const match = text.match(regex);
+
+  if (match) {
+    return {
+      name: match[1].trim(),
+      extra: match[2].trim()
+    };
+  }
+  return null;
+}
+
+const originalPrice = discount > 0 ? base_price / (1 - discount / 100) : null;
+const parsedData = parseProductName(name);
+const productName = parsedData?.name ? parsedData.name : name;
+---
+
+<style>
+  .cursor-pointer {
+    cursor: pointer;
+  }
+</style>
+
+<div 
+  class="product-card" 
+  data-product-id={id} 
+  data-category-id={product.category_id} 
+  style={defaultVisible ? "" : "display: none;"}
+>
+  <div class="product-card-image cursor-pointer btn-details-trigger">
+    <img src={image} alt={name} loading="lazy" />
+    <div class="product-card-overlay"></div>
+    {parsedData?.extra && <div class="product-card-label">{parsedData.extra}</div>}
+    {discount > 0 && <div class="discount-label">{discount}% OFF</div>}
+  </div>
+  <div class="product-card-content cursor-pointer btn-details-trigger">
+    <h3 class="product-card-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+      </svg>
+      {productName}
+    </h3>
+    <p class="product-card-text">{short_description}</p>
+  </div>
+  <div class="product-card-price cursor-pointer btn-details-trigger">
+    {originalPrice && <p class="old-price">${originalPrice.toFixed(2)} {currency}</p>}
+    <p class="new-price">${total_price.toFixed(2)} {currency}</p>
+  </div>
+  <div class="product-card-actions">
+    <button class="btn btn-details btn-details-trigger">
+      Ver detalles
+    </button>
+    <button class="btn btn-buy btn-add-to-cart-trigger" data-product={JSON.stringify(product)}>
+      Comprar
+    </button>
+  </div>
+</div>

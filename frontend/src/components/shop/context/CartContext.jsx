@@ -1,6 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { createCart, deleteCartDb, getCart, updateCart } from "../services/api";
-import { useProductsContext } from "./ProductsContext";
 
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
@@ -9,55 +7,45 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartLoading, setCartLoading] = useState(false);
-  const [cartId, setCartId] = useState(localStorage.getItem("cartId"));
-  const { packages } = useProductsContext()
 
-  async function fetchCart() {
-    if (!cartId) return;
-    setCartLoading(true)
-    const cartData = await getCart(cartId).catch((error) => {
-      console.error("Error fetching cart:", error);
-      setCartLoading(false)
-      localStorage.removeItem("cartId");
-      setCartId(null);
-    } );
-    if (cartData){ 
-      setCart(cartData);
-      setCartLoading(false)
-    }
-  }
-
+  // Load cart from localStorage on mount
   useEffect(() => {
-    fetchCart();
-  }, [cartId]);
+    try {
+      const storedCart = localStorage.getItem("zuros_cart");
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+    } catch (e) {
+      console.error("Error loading cart from localStorage:", e);
+    }
+  }, []);
 
-  const addToCart = async (id, quantity = 1) => {
-    const product = packages.find((p) => p.id === id);
+  // Save cart to localStorage whenever it changes
+  const saveCartToStorage = (updatedCart) => {
+    try {
+      localStorage.setItem("zuros_cart", JSON.stringify(updatedCart));
+    } catch (e) {
+      console.error("Error saving cart to localStorage:", e);
+    }
+  };
+
+  const addToCart = async (productOrId, quantity = 1) => {
+    const product = typeof productOrId === "object" ? productOrId : null;
+    const id = product ? product.id : productOrId;
     if (!product) return;
 
     let updatedCart;
-    
-    if (!cartId) {
-      setCartLoading(true)
-      setCartOpen(true);
-      const newCartId = await createCart([{ id, quantity }])
-
-      localStorage.setItem("cartId", newCartId);
-      setCartId(newCartId);
-      updatedCart = [{ ...product, quantity }];
-      setCartLoading(false)
+    const existingItem = cart.find((item) => item.id === id);
+    if (existingItem) {
+      updatedCart = cart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + quantity } : item
+      );
     } else {
-      const existingItem = cart.find((item) => item.id === id);
-      if (existingItem) {
-        updatedCart = cart.map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity + quantity } : item
-        );
-      } else {
-        updatedCart = [...cart, { ...product, quantity }];
-      }
-       updateCart(cartId, updatedCart)
+      updatedCart = [...cart, { ...product, quantity }];
     }
+
     setCart(updatedCart);
+    saveCartToStorage(updatedCart);
     setCartOpen(true);
   };
 
@@ -69,20 +57,22 @@ export const CartProvider = ({ children }) => {
     );
 
     setCart(updatedCart);
-    updateCart(cartId, updatedCart);
+    saveCartToStorage(updatedCart);
   };
 
   const removeFromCart = (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
-    updateCart(cartId, updatedCart);
+    saveCartToStorage(updatedCart);
   };
 
   const deleteCart = async () => {
-    localStorage.removeItem("cartId");
     setCart([]);
-    setCartId(null);
-    await deleteCartDb(cartId);
+    try {
+      localStorage.removeItem("zuros_cart");
+    } catch (e) {
+      console.error("Error clearing cart from localStorage:", e);
+    }
   };
 
   const cartTotal = cart.reduce((total, item) => total + item.total_price * item.quantity, 0);
@@ -93,7 +83,6 @@ export const CartProvider = ({ children }) => {
         cart,
         cartOpen,
         cartLoading,
-        cartId,
         toggleCart: () => setCartOpen((prev) => !prev),
         addToCart,
         updateQuantity,

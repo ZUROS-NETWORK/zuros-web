@@ -1,16 +1,14 @@
 import { checkoutBasket } from "./tebex.jsx";
-import { getCart } from "./api";
 
 const tebexToken = import.meta.env.PUBLIC_TEBEX_PUBLIC_TOKEN || import.meta.env.VITE_TEBEX_PUBLIC_TOKEN;
 
-export async function checkoutService({ cartId, username }) {
-  const cart = await getCart(cartId);
+export async function checkoutService({ cart, username }) {
   const baseUrl = window.location.origin;
   const url = {
     completeUrl: `${baseUrl}/gracias`,
     cancelUrl: `${baseUrl}/tienda`,
   };
-  if (!cart) {
+  if (!cart || cart.length === 0) {
     throw new Error("El carrito está vacío o no existe.");
   }
 

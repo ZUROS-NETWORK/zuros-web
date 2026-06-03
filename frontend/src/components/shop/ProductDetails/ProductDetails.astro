@@ -7,35 +7,140 @@ interface Props {
 }
 
 const { product } = Astro.props;
-const originalPrice = product.discount > 0 ? product.total_price / (1 - product.discount / 100) : null;
+
+function parseProductName(text: string) {
+  if (!text) {
+    return {
+      name: "",
+      duration: null,
+      discount: null
+    };
+  }
+
+  const parts = [...text.matchAll(/[\[(]([^[\]()]+)[\])]/g)];
+
+  let duration = null;
+  let discount = null;
+
+  for (const part of parts) {
+    const value = part[1].trim();
+
+    const discountMatch = value.match(/^-(\d+)%$/);
+
+    if (discountMatch) {
+      discount = Number(discountMatch[1]);
+    } else if (!duration) {
+      duration = value;
+    }
+  }
+
+  const cleanName = text
+    .replace(/[\[(][^[\]()]+[\])]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return {
+    name: cleanName,
+    duration,
+    discount
+  };
+}
+
+const parsedData = parseProductName(product.name);
+
+const customDiscount = parsedData.discount;
+
+const originalPrice =
+  customDiscount && customDiscount > 0
+    ? product.total_price / (1 - customDiscount / 100)
+    : null;
 ---
 
 <style>
   .product-details-overlay.hidden {
     display: none;
   }
+  .product-discount-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: #22c55e;
+    color: white;
+    font-size: .9rem;
+    font-weight: 700;
+  }
+
+  .product-duration-badge {
+    color: #555454;
+  }
 </style>
 
-<div class="product-details-overlay hidden" id={`details-modal-${product.id}`}>
+<div
+  class="product-details-overlay hidden"
+  id={`details-modal-${product.id}`}
+>
   <div class="product-details-container">
     <div class="product-details-title-bar">
-      <h2 class="product-details-name">{product.name}</h2>
-      <button class="details-close-button details-close-trigger" data-close-id={product.id} aria-label="Cerrar detalles">
+      <div>
+        <h2 class="product-details-name">
+          {parsedData.name}
+
+        {parsedData.duration && (
+          <span class="product-duration-badge">
+            {parsedData.duration} 
+          </span>
+        )}
+
+        {customDiscount && (
+          <span class="product-discount-badge">
+            -{customDiscount}% OFF
+          </span>
+        )}
+        </h2>
+      </div>
+
+      <button
+        class="details-close-button details-close-trigger"
+        data-close-id={product.id}
+        aria-label="Cerrar detalles"
+      >
         <X class="details-close-button-icon" />
       </button>
     </div>
+
     <div class="product-details-info">
       <img
         src={product.image}
-        alt={product.name}
+        alt={parsedData.name}
         class="product-details-image"
       />
-      <div class="product-details-description" set:html={product.description} />
+
+      <div
+        class="product-details-description"
+        set:html={product.description}
+      />
     </div>
+
     <div class="product-details-price">
-      {originalPrice && <p class="old-price">${originalPrice.toFixed(2)} {product.currency}</p>}
-      <p class="new-price">${product.total_price.toFixed(2)} USD</p>
+      {originalPrice && (
+        <p class="old-price">
+          ${originalPrice.toFixed(2)} {product.currency}
+        </p>
+      )}
+
+      <p class="new-price">
+        ${product.total_price.toFixed(2)} {product.currency}
+      </p>
     </div>
-    <button class="add-to-cart btn-add-to-cart-trigger" data-product={JSON.stringify(product)} data-close-after="true">Agregar al carrito</button>
+
+    <button
+      class="add-to-cart btn-add-to-cart-trigger"
+      data-product={JSON.stringify(product)}
+      data-close-after="true"
+    >
+      Agregar al carrito
+    </button>
   </div>
 </div>
